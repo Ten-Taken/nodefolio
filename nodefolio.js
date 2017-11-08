@@ -14,4 +14,13 @@ Application begins here.
 	Reference:  https://nodejs.org/api/globals.html
 */
 
-console.log("Hello world!");
+console.log("Hello world!"); // Logs message
+console.log(__dirname); //Prints directory
+console.log(__filename);  // Prints complete path
+
+var time = 0;
+var timer = setInterval(function(){
+	time +=1;
+	console.log(time +" seconds");
+	if (time >6) {clearInterval(timer);}
+},1000);
