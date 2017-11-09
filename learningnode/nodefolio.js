@@ -117,3 +117,25 @@ people.forEach(function(person){
 victor.emit('speak', 'I also like to live dangerously.');
 john.emit('speak','There are many fish in the sea, but few worth catching.');
 beth.emit('speak', 'All your base are belong to us!');
+
+
+/* Core Module - fs module
+**
+	The fs module can be used for RW file manipulation.
+*/
+var fs = require('fs');
+
+//Synchronous methods complete execution before the program continues. (Execution waits. AKA 'Blocking Code')
+var dummytxt = fs.readFileSync('dummy.txt', 'utf8'); // (path, encoding)
+console.log(dummytxt);
+
+//Synchronous file output
+fs.writeFileSync('writeMe.txt',dummytxt); // (path, data)
+
+//Asynchronous methods are non-blocking, program execution continues before execution finishes. (path, encoding, callback)
+	//callback executes when operation is completed
+fs.readFile('dummy.txt','utf8', function(err, data){
+	console.log(data);
+});
+
+console.log('This is not blocked by the second read-through!');
