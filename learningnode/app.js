@@ -164,3 +164,9 @@ fs.unlink('writeMe.txt'); //shell warns using asynch functions without callback 
 		});
 	});
 	*/
+
+
+/* Node networking
+**
+	See server.js
+*/
