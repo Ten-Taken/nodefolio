@@ -176,3 +176,9 @@ fs.unlink('writeMe.txt'); //shell warns using asynch functions without callback 
 **
 	See buffers.js
 */
+
+
+/*Pipes
+**
+	See pipes.js
+*/
