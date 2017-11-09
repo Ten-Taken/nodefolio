@@ -139,3 +139,28 @@ fs.readFile('dummy.txt','utf8', function(err, data){
 });
 
 console.log('This is not blocked by the second read-through!');
+
+//Deleting files with fs module
+fs.unlink('writeMe.txt'); //shell warns using asynch functions without callback is deprecated. Current LTS is later than tut material
+
+
+//Creating directory - Sync
+	//fs.mkdirSync('tempDIR');
+//Deleting directory - Sync
+	//fs.rmdirSync('tempDIR');
+//Creating directory - Async
+	/*
+	fs.mkdir('tempDIR', function(){
+		fs.readFile('dummy.txt', 'utf8', function(err,data){
+			fs.writeFile('./tempDIR/dummycopy.txt',data);
+		});
+	});
+	*/
+//Deleting directory - Async
+	/*
+	fs.unlink('./tempDIR/dummycopy.txt',function(){
+		fs.rmdir('./tempDIR', function(){
+			console.log('Directory removed');
+		});
+	});
+	*/
