@@ -200,3 +200,12 @@ fs.unlink('writeMe.txt'); //shell warns using asynch functions without callback 
 **
 	See routeserver.js
 */
+
+
+/*npm packages
+**
+	npm init:  initializes module, stores versioning and dependencies in package.json
+		Cloning / installing the app with 'npm install', will automatically pull down listed dependencies
+	Express: 	Express.js framework
+	Nodemon:  Monitors package for changes and automatically restarts server on live
+*/

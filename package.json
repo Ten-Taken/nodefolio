@@ -4,7 +4,8 @@
   "description": "Developer Portfolio",
   "main": "nodefolio.js",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "nodemon": "^1.12.1"
   },
   "devDependencies": {},
   "scripts": {
