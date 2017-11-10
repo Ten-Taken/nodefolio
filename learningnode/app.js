@@ -206,6 +206,9 @@ fs.unlink('writeMe.txt'); //shell warns using asynch functions without callback 
 **
 	npm init:  initializes module, stores versioning and dependencies in package.json
 		Cloning / installing the app with 'npm install', will automatically pull down listed dependencies
-	Express: 	Express.js framework
+
+	Express: 	Express.js framework, See '../learningexpress'
+	
 	Nodemon:  Monitors package for changes and automatically restarts server on live
+		Use command: nodemon appName.js
 */
