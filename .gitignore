@@ -11,3 +11,7 @@
 
 pkg/
 src/
+
+#Ignore Express dependencies
+**node_modules
+/package-lock.json
