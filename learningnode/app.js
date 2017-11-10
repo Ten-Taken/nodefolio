@@ -188,3 +188,9 @@ fs.unlink('writeMe.txt'); //shell warns using asynch functions without callback 
 **
 	See wserver.js
 */
+
+
+/*Serving json 
+**
+	See jsonserver.js
+*/
