@@ -1,0 +1,27 @@
+{
+  "name": "nodefolio",
+  "version": "0.0.1",
+  "description": "Developer Portfolio",
+  "main": "nodefolio.js",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ten-Taken/nodefolio.git"
+  },
+  "keywords": [
+    "node",
+    "portfolio"
+  ],
+  "author": "Gregory Wolfe (Ten-Taken)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Ten-Taken/nodefolio/issues"
+  },
+  "homepage": "https://github.com/Ten-Taken/nodefolio#readme"
+}
