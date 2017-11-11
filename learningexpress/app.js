@@ -14,6 +14,16 @@ var app = express();
 //Setting a view engine in Express
 app.set('view engine', 'ejs');
 
+//Setting stylesheet middleware
+	/*
+	app.use('/assets', function(req, res, next){ //Next param directs execution to the next middleware in the route
+		console.log(req.url);
+		next();
+	});
+	*/
+//Setting stylesheet middleware with Express
+	app.use('/assets', express.static('assets')); // .static method handles next();
+
 /*Networking with express
 **
 	http "verbs"(methods)
@@ -25,9 +35,11 @@ app.set('view engine', 'ejs');
 	Express adds new methods to the request and response objects.
 */
 
+/*
 app.get('/', function (req,res) {
 	res.send("This is the homepage"); //Content type not needed, Express handles it
 });
+*/
 
 /*Route Parameters with Express
 **
@@ -74,10 +86,27 @@ app.get('/template/:name', function (req,res) {
 	res.render('template', {name: req.params.name, info: info});
 });
 
+app.get('/', function(req,res){
+	res.render('home');
+})
+
+app.get('/about', function(req,res){
+	res.render('about');
+})
 
 /* Partial Templates with EJS
 **
 	See /views/partials/nav.ejs
+*/
+
+
+/*Static Files - Middleware
+**
+	Hoisting example near top of file.
+	Middleware is any code that exists between the request and response.
+	Since node apps handle rendering and view routing, a standard
+	stylesheet request is not recognized by the server.
+	app.use
 */
 
 //Listening on port
