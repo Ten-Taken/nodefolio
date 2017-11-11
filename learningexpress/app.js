@@ -38,5 +38,20 @@ app.get('/profile/:id', function(req,res){
 	res.send('You requested the profile of id: '+req.params.id);  //param identifier can be anything
 });
 
+
+/*Templating Engines with Express
+**
+	Response object's .sendFile method is used to route html views. 
+	Again, Content-Type does not need to be declared with Express.
+
+	A templating engine allows embedding (injection) of data and structure
+	into the template before sending a rendered view.  Doing this with
+	EJS.  Reference http://www.embeddedjs.com/
+*/
+app.get('/template', function (req,res) {
+	res.sendFile(__dirname+'/template.html');
+});
+
 //Listening on port
 app.listen(3000);
+
