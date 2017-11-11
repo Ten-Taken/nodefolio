@@ -75,6 +75,11 @@ app.get('/template/:name', function (req,res) {
 });
 
 
+/* Partial Templates with EJS
+**
+	See /views/partials/nav.ejs
+*/
+
 //Listening on port
 app.listen(3000);
 
