@@ -4,10 +4,10 @@
 	<title>EJS Templating</title>
 	<style type="text/css">
 		body{
-			background-color: skyblue;
+			background-color: yellow;
 			font-family: verdana;
 			padding: 30px;
-			color: #FFF;
+			color: #000;
 		}
 		h1{
 			font-size: 48px;
@@ -22,8 +22,14 @@
 	</style>
 </head>
 <body>
-	<h1>Welcome to  my test page!</h1>
-	<p>This test page is being used for EJS templating with Express. This is standard Server-Side Rendering.</p>
+	<h1>You requested a template named <%= name %></h1>
+	<p>
+		<ul>
+			<strong><li>Age:  <%= info.age %></li></strong>
+			<strong><li>Favorite Food:  <%= info.food %></li></strong>
+			<strong><li>Speaks:  <%= info.language %></li></strong>
+		</ul>
+	</p>
 
 </body>
 </html>
