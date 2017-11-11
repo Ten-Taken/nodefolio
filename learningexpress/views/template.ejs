@@ -31,5 +31,19 @@
 		</ul>
 	</p>
 
+<!-- Scripting logic can be used within the EJS template. -->
+	<h3>Hobbies Include:</h3>
+	<p>
+		<ul>
+			<% 
+				info.hobbies.forEach(function(item){
+			%>
+				<li><%= item %></li>
+			<%	
+				});
+			%>
+		</ul>
+	</p>
+
 </body>
 </html>

@@ -70,7 +70,7 @@ app.get('/template/:name', function (req,res) {
 	*/
 
 	//Additional data (often from db query)
-	var info = {age: 110, food: 'Sushi', language: 'English'};
+	var info = {age: 110, food: 'Sushi', language: 'English', hobbies: ['Gaming', 'Skiing', 'Lifting']};
 	res.render('template', {name: req.params.name, info: info});
 });
 
