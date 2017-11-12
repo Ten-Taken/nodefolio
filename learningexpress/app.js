@@ -7,6 +7,7 @@
 */
 
 var express = require('express'); //Import module
+var bodyParser = require('body-parser'); //Import parser module for post requests
 
 //The express module returns a function to store the entire object
 var app = express();
@@ -116,6 +117,20 @@ app.get('/about', function(req,res){
 	Query strings are handled from the request object, using query
 	See example in 'about' page.
 */
+
+
+/* POST - http post request with Express
+**
+	See example in 'about' page template.
+
+	With .get() requests, the request object parses strings. 
+	The request object cannot parse data from a POST.
+	Using the body-parser package from the node ecosystem, 
+	see https://www.npmjs.com/package/body-parser
+
+	Express Route-Specific
+*/
+
 
 
 //Listening on port
