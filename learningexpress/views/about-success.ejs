@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>EJS About</title>
+<link rel="stylesheet" type="text/css" href="/assets/style.css">
+</head>
+<body>
+	<!-- Including Partial Template -->
+	<% include partials/nav.ejs %>
+	<h1>Submission Successful</h1>
+	
+
+
+<hr>
+<h3>Contact Request Received!</h3>
+
+<p>The requested party will get in touch with you as soon as we're done eating ice cream.</p>
+
+<p>You contacted: <%= data.who %> , for <%= data.company %>. Your email is <%= data.email %></p>
+
+</body>
+</html>

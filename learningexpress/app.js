@@ -12,6 +12,9 @@ var bodyParser = require('body-parser'); //Import parser module for post request
 //The express module returns a function to store the entire object
 var app = express();
 
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false }); //middleware for parsing POST body
+
 //Setting a view engine in Express
 app.set('view engine', 'ejs');
 
@@ -131,7 +134,15 @@ app.get('/about', function(req,res){
 	Express Route-Specific
 */
 
+// POST urlencoded bodies
+app.post('/about', urlencodedParser, function (req, res) {
+	console.log(req.body);
+  if (!req.body) return res.sendStatus(400)
+  res.render('about-success', {data: req.body});
+})
 
+
+/* For reference - Nodemailer package looks nice for confirmation */
 
 //Listening on port
 app.listen(3000);
