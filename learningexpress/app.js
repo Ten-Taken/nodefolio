@@ -143,6 +143,16 @@ app.post('/about', urlencodedParser, function (req, res) {
 
 
 /* For reference - Nodemailer package looks nice for confirmation */
+/* For reference - Mongoose package is an option for Mongo */
+
+/* MVC Design with Express
+**
+	Model - data
+	View - templates
+	Controller - (Module, for eg. Routing views.)
+		var controller = require('controller');
+		controller(app);  -- this passes app into controller function
+*/
 
 //Listening on port
 app.listen(3000);
