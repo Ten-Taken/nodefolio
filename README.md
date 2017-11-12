@@ -13,7 +13,7 @@ Documentation standards TBD prior to v 1.0.
 ### Technologies
 _Technologies Used_
 1. [Node.js](https://nodejs.org/en/ "Node.js")
-2. Express.js[link](http://example.com "Title")
+2. [Express.js](http://example.com "Express.js")
 3. [EJS](http://www.embeddedjs.com/ "EJS")
 4. Mongo / PostGres (TBD)
 5. [Bootstrap](http://getbootstrap.com/ "Bootstrap")
