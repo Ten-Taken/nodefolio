@@ -9,6 +9,21 @@
 	<% include partials/nav.ejs %>
 	<h1>EJS About Page</h1>
 	<p>Fake about page for sake of nav.</p>
+	<p>Outputting query string data. Company:  <%= qs.company %> Owner: <%= qs.owner %></p>
+
+
+<hr>
+<h3>Test Form</h3>
+
+<form id="about-form">
+	<label for="who">Who do you want to contact?</label>
+	<input type="text" name="who" value="<%= qs.owner %>">
+	<label for="company"> Which company?</label>
+	<input type="text" name="company" value="<%= qs.company %>">
+	<label for="email">Email</label>
+	<input type="text" name="email">
+	<input type="submit" value="submit">
+</form>
 
 </body>
 </html>

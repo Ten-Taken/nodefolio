@@ -91,7 +91,8 @@ app.get('/', function(req,res){
 })
 
 app.get('/about', function(req,res){
-	res.render('about');
+	console.log(req.query); //Testing with {company: 'ABC', owner: 'Nate'}
+	res.render('about', {qs: req.query});
 })
 
 /* Partial Templates with EJS
@@ -108,6 +109,14 @@ app.get('/about', function(req,res){
 	stylesheet request is not recognized by the server.
 	app.use
 */
+
+
+/*Query Strings
+**
+	Query strings are handled from the request object, using query
+	See example in 'about' page.
+*/
+
 
 //Listening on port
 app.listen(3000);
