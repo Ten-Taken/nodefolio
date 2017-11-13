@@ -35,7 +35,7 @@ app.set('view engine', 'ejs');
 
 
 // Static file routing middleware.
-app.use(express.static('./public'));
+app.use(express.static('public'));
 
 // Static routing for localized Bootstrap
 app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); 
