@@ -18,6 +18,7 @@
 		5. Template Partials
 		6. Decide on data model, integrate relational or document db
 		7. Integrate Nodemailer
+		8. Unit Testing workflow
 */
 
 // Import modules.
