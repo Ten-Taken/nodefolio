@@ -5,7 +5,7 @@ Pertinent, new information will go here as needed.
 
 Version 4.0 is currently in beta.  
 
-Response UI Framework / library with mobile-first design philosophy.
+Responsive UI Framework / library with mobile-first design philosophy.
 
 ==========
 
@@ -18,7 +18,7 @@ Grid System
 
 	Multiple classes are then passed to the element to help define changing behavior based on the viewport.
 
-	Breakoints
+	Breakpoints
 		xs < 768px
 		sm >= 768px
 		md >= 992px
@@ -149,5 +149,79 @@ Dropdown menues
 			<li>Choice3</li>
 		</ul>
 	</container>
+
+
+
+Pills and Tabs (not drugs!)
+	Bootstrap has styling for navigation pills and tabs.
+
+	.nav - Adds some selectable / hover effects to <ul>
+	.nav-tabs - Turns <ul><li>'s into tabs
+	.active  - Turns <li> into active tab
+	.nav-pills - Turns <ul> into pills. (Color pill, no tab content outline)
+	.nav-stacked  - Turns <ul> nav elements vertical
+	.nav-justified  - Gives equal width to all <li> elements in <ul>
+
+	The above are typically good for sub-navigation.  Primary navigation has more available via additional classes.
+		.navbar - Used on the nav element itself
+		.navbar-default  - Sets up a bit of a tab system
+		.navbar-inverse   - Inverts styling
+		.navbar-nav  - Used on <ul> while nesting inside nav tags.
+		Eg.  
+
+		<nav>
+			<ul class="nav navbar-nav">
+				<li></li>
+			</ul>
+		</nav>
+
+		Eg.  Keeping <ul> in a container, nav element free from reponsive...
+			<nav>
+				<div class=container>
+				<ul><li></li></ul>
+				</div>
+			</nav>
+
+		.navbar-fixed-bottom  - Fixes nav to bottom, free from scroll.
+		.navbar-fixed-top  - Fixes nav to top, free from scroll.
+
+		.navbar-header  - For fixing logos, etc to nav element
+		.navbar-brand   - <a> tie to links within logo area
+
+		.navbar-btn   - Used with other btn classes to stick a nice looking button on nav
+		.navbar-right  - Floats element to the right of nav
+
+	Collapsible Mobile Nav
+		Toggle button for the menu must go inside .navbar-header.
+		.icon-bar  - Gives the single bar typically used with mobile stuff. Three of them makes the stack.
+			<button class="navbar-toggle  navbar-collapse" data-toggle="collapse" data-target="#myDropDown">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+		Collapse menu does not need to be inside .navbar-header
+		<div class="collapse navbar-collapse" id="myDropDown"> Nav </div>
+
+
+Jumbotrons
+	I kid you not.  Why not call it Big-ify ?  This wraps content in a box with some background shading and makes it all stand out.
+		.jumbotron  - See above.
+
+
+
+Form Styling
+Badges & Labels
+Panels
+Tooltips
+Carousels
+Modals, Popups
+Accordians
+
+Flexgrid  (NEW in 4.0)
+Cards (New in 4.0)
+
+
+Bootstrap Themes
+	Theme files are more or less addons, you include their namespace on top of bootstrap.
 
 */
