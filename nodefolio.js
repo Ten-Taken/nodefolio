@@ -6,7 +6,7 @@
 
 	TO DO:
 		1. Handle XSS and CSRF vulnerabilities.
-		2. Set up Certificate Authority (Let's Encrypt)
+		2. Set up Certificate Authority (Let's Encrypt) (Certbot 90 day)
 		3. Pull Bootstrap into local environment (nix CDN) **DONE**
 		4. Wireframe
 			1. Index
@@ -40,7 +40,7 @@ app.use(express.static('./public'));
 app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); 
 app.use('/jquery/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/bootstrap/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
-app.use('/popper/js', express.static(__dirname + '/node_modules/popper.js/dist'));
+app.use('/popper/js', express.static(__dirname + '/node_modules/popper.js/dist/umd'));
 
 
 // Fire controllers
