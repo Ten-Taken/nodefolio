@@ -9,5 +9,14 @@ body{
 }
 
 .navbar, .navbar-brand {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
+}
+
+/*Modifying class due to bug, discussed on official bootstrap repo at
+	https://github.com/twbs/bootstrap/issues/21874
+	Caused by flex model inheritance.
+	This fix is used in conjunction with using "nav-fill" justification class on the nav element.
+*/
+.navbar-nav{
+	width: 100%;
 }
