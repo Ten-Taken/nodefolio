@@ -3,11 +3,11 @@
 /*Many elements inherit bootstrap body properties. 
 Overriding here  will cascade in many cases.*/
 body{
-	background-color: #000;
+	/*Theme - font: roboto */
+
+	font-size: 1rem;
 }
 
-/*navbar container bg-color
-.bg-dark{
-	background-color: #000 !important;
+.navbar, .navbar-brand {
+	font-size: 1.2rem;
 }
-*/
