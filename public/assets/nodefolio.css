@@ -21,3 +21,9 @@ body{
 .navbar-nav{
 	width: 100%;
 }
+
+
+footer{
+	background-color: #1f7bc1;
+	color: #FFF;
+}

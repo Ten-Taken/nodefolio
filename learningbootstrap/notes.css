@@ -134,6 +134,8 @@ Visibility
 	.hidden-xs  - Become hidden as the extra small break point.
 	.visible-xs  - Does the opposite.
 
+	These have been removed in bootstrap 4,
+	reference documentation at https://getbootstrap.com/docs/4.0/migration/#responsive-utilities
 
 
 Dropdown menues
