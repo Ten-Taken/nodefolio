@@ -12,13 +12,18 @@
 			1. Index
 			2. About
 			3. Dev Blog
-			4. Open Badges
+			4. Open Badges (moving to about)
 			5. Project Showcase
-			6. Hire me
+			6. Hire me (client+emp)
 		5. Template Partials
 		6. Decide on data model, integrate relational or document db
 		7. Integrate Nodemailer
 		8. Unit Testing workflow
+		9. Meta content
+		10. Set active state scripting on nav elements
+		11. Typography decisions
+		12. API's
+		13. EJS data injections
 */
 
 // Import modules.
