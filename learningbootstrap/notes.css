@@ -14,15 +14,25 @@ Grid System
 	This system is utilized in BS classes with naming convention "col-size-columnCount".
 	Where size represents standard breakpoints for devices (mobile, tablet, screens, large screens).
 
-		E.g.  "col-sm-6" means that on small screens, the element is allotted 50% of the screen space.
+		E.g.  "col-sm-6" means that on small screens (AND UP), the element is allotted 50% of the screen space.
 
 	Multiple classes are then passed to the element to help define changing behavior based on the viewport.
 
-	Breakpoints
-		xs < 768px
-		sm >= 768px
-		md >= 992px
-		lg >= 1200px
+	Breakpoints BS 4.0
+		xs <= 576px  (no media query, default BS)
+		sm = 576px
+		md = 768px
+		lg = 992px
+		xl = 1200px
+
+
+	flex utilities added in 4.0 (see documentation).
+	Some quick examples
+		Eg
+			.flex-first
+			.flex-last
+			These both specify element order (removing from the natural dom flow.). This can be used in 
+			conjunction with media queries.
 
 	So in essence, bootstrap is the reason every WordPress site looks identical, and for the robotic naming convention. 
 	The more you know!
