@@ -1,5 +1,8 @@
 /* Style and Bootstrap overrides */
 
+/*Custom Fonts*/
+@import url('https://fonts.googleapis.com/css?family=Coda');
+
 /*Many elements inherit bootstrap body properties. 
 Overriding here  will cascade in many cases.*/
 body{
@@ -9,8 +12,26 @@ body{
 }
 
 /*Nav font re-size*/
-.navbar, .navbar-brand {
+.navbar {
 	font-size: 1.1rem;
+}
+
+.node-navBrand{
+	font-family: 'Coda', cursive;
+	color: #B83309;
+	font-size: 1.5rem;
+	/*Diffusing color values for glow effect. Inner remains base to maintain high contrast*/
+	text-shadow: 0 0 10px #000,
+				0 0 20px #000,
+				0 0 30px #000,
+				0 0 40px #FF003E,
+				0 0 70px #FF003E,
+				0 0 80px #FF4C00;
+
+}
+
+.bg-primary { /*Overriding theme primary color*/
+	background-color: #1f7bc1 !important;
 }
 
 /*Modifying class due to bug, discussed on official bootstrap repo at
