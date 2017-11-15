@@ -27,10 +27,38 @@ module.exports = function(app){
 		app.route(index)
 			.get(function(req, res){
 				res.render('index');
-			})
-			.post(function(req, res){
-				res.send('That type of request is shunned in these parts.');
 			});
+
+	// About Page
+		app.route('/about')
+  			.get(function (req, res) {
+				res.render('about');
+  			});
+
+
+	// Showcase Page
+		app.route('/showcase')
+  			.get(function (req, res) {
+				res.render('showcase');
+  			});
+
+	// Blog Page
+		app.route('/blog')
+  			.get(function (req, res) {
+				res.render('blog');
+  			});
+
+	// Contracts Page
+		app.route('/clients')
+  			.get(function (req, res) {
+				res.render('contract');
+  			});
+
+	// Employers Page
+		app.route('/employers')
+  			.get(function (req, res) {
+				res.render('employer');
+  			});	
 
 
 }
