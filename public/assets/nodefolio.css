@@ -53,3 +53,13 @@ footer{
 	color: #EBF346;
 	font-size: 1.2rem;
 }
+
+/*Custom Classes for WIP pages*/
+.coming-soon-container{
+	height: 100vh; /*Container for vertical centering in viewport.*/
+	position: relative;
+}
+.coming-soon-child{
+	top: 33%;
+	position: relative;
+}
