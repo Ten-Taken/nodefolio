@@ -24,6 +24,8 @@
 		11. Typography decisions
 		12. API's
 		13. EJS data injections
+		14. Set middleware request logging on static routes
+		15. Fix Firefox favicon bug
 */
 
 // Import modules.
