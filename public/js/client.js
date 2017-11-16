@@ -39,3 +39,16 @@ $(document).ready(function(){
 
 	navBarSelected();
 
+
+
+
+//Prototype for Geo Location API's
+function currentLocation(latitude,longitude){
+	return "Latitude: " +latitude + " Longitude: "+longitude;
+}
+function findMe(){
+	navigator.geolocation.getCurrentPosition(function(position) {
+	  currentLocation(position.coords.latitude, position.coords.longitude);
+	});
+}
+//findMe();

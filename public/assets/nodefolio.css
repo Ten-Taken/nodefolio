@@ -63,3 +63,12 @@ footer{
 	top: 33%;
 	position: relative;
 }
+
+
+/*Custom font color*/
+.text-chalk{
+	color: #DEE0AC;  /*E1E579 and FBFF7A, other options*/
+}
+
+/*May set up some breakpoints on typography, see https://v4-alpha.getbootstrap.com/content/typography/#responsive-typography
+*/
