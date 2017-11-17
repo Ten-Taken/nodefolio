@@ -47,7 +47,6 @@ app.use(express.static('public'));
 // Static routing for localized Bootstrap
 app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); 
 app.use('/jquery/js', express.static(__dirname + '/node_modules/jquery/dist'));
-app.use('/bootstrap/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/popper/js', express.static(__dirname + '/node_modules/popper.js/dist/umd'));
 
 

@@ -8,6 +8,8 @@
 *.log
 *.log.*
 *.sig
+
+#App deployment module, dev dependency only. This file contains sensitive data for deployment server
 flightplan.js
 
 pkg/
