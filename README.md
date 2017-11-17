@@ -19,7 +19,7 @@ _Technologies Used_
 
 ### Installation
 1. Download or clone the repository into your node environment
-2. Run `npm install` from the root directory
+2. Run `npm install --production` from the root directory
 3. Replace `nodefolio/node_modules/bootstrap/dist/css/bootstrap.min.css` with [this](https://bootswatch.com/4/cyborg/bootstrap.min.css "Cyborg Theme")
 
 ### Versioning
