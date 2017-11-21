@@ -6,9 +6,9 @@
 
 	TO DO:
 		1. Handle XSS and CSRF vulnerabilities.
-		2. Set up Certificate Authority (Let's Encrypt) (Certbot 90 day)
-		3. Pull Bootstrap into local environment (nix CDN) **DONE**
-		4. Wireframe
+		2. Set up Certificate Authority (Let's Encrypt) (Certbot 90 day) **DONE**
+		3. Pull Bootstrap into local environment (partial CDN) **DONE**
+		4. Wireframe **DONE**
 			1. Index
 			2. About
 			3. Dev Blog
@@ -20,16 +20,19 @@
 		7. Integrate Nodemailer
 		8. Unit Testing workflow
 		9. Meta content
-		10. Set active state scripting on nav elements
+		10. Set active state scripting on nav elements **DONE**
 		11. Typography decisions
 		12. API's
 		13. EJS data injections
 		14. Set middleware request logging on static routes
 		15. Fix Firefox favicon bug
+		16. Error handling
+		17. Automate SSL renewal
 */
 
 // Import modules.
 var express = require('express');
+var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var path = require('path'); //Resolves absolute paths for the filesystem
@@ -64,10 +67,15 @@ routeController(app);
 	//Uncomment for local testing
 		//app.listen(3000);
 
-// Comment out for local testing
-https.createServer({
-    key: privateKey,
-    cert: certificate
-}, app).listen(3000);
+	// Comment out for local testing
 
-console.log('Listening on port 3000');
+		//http server
+		http.createServer(app).listen(2637);
+		console.log('Listening for http on port 2637');
+
+		//https server
+		https.createServer({
+		    key: privateKey,
+		    cert: certificate
+		}, app).listen(3000);
+		console.log('Listening for https on port 3000');

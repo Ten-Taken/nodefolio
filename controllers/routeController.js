@@ -8,7 +8,7 @@ module.exports = function(app){
 	
 		app.use(
 
-		//Re-route unsecure requests to secure	
+		//Re-route unsecure requests to secure (Comment out for local testing)
 			function(req, res, next){
 				if(!req.secure) {
     					var secureUrl = "https://" + req.headers['host'] + req.url; 
