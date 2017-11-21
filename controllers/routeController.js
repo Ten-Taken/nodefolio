@@ -5,8 +5,21 @@
 
 module.exports = function(app){
 
-	// Request Logging for server
-		app.use(function(req, res, next) {
+	
+		app.use(
+
+		//Re-route unsecure requests to secure	
+			function(req, res, next){
+				if(!req.secure) {
+    					var secureUrl = "https://" + req.headers['host'] + req.url; 
+    					res.writeHead(301, { "Location":  secureUrl });
+					res.end();
+				}
+			next();
+		},
+
+		// Request Logging for server	
+			function(req, res, next) {
 
 		// Store remote address of request origin
 			var ip = req.headers['x-forwarded-for'] || 
@@ -19,7 +32,9 @@ module.exports = function(app){
 
 		// continue doing what we were doing and go to the route
 			next(); 
-		});
+		}
+
+		);
 
 
 	// Index routing - (Chaining verbs)

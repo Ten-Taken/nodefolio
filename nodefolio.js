@@ -29,12 +29,17 @@
 */
 
 // Import modules.
-var express = require('express'); 
+var express = require('express');
+var https = require('https');
+var fs = require('fs');
+var path = require('path'); //Resolves absolute paths for the filesystem
 var routeController = require('./controllers/routeController.js');
 
 
 // Define variables.
 var app = express();
+var privateKey = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywolfe.tech/privkey.pem' ));
+var certificate = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywolfe.tech/cert.pem' ));
 
 
 // Set template engine.
@@ -54,6 +59,15 @@ app.use('/popper/js', express.static(__dirname + '/node_modules/popper.js/dist/u
 routeController(app);
 
 
-// Server port for incoming requests
-app.listen(3000);
+// Launch Server
+
+	//Uncomment for local testing
+		//app.listen(3000);
+
+// Comment out for local testing
+https.createServer({
+    key: privateKey,
+    cert: certificate
+}, app).listen(3000);
+
 console.log('Listening on port 3000');
