@@ -78,4 +78,5 @@ routeController(app);
 		    key: privateKey,
 		    cert: certificate
 		}, app).listen(3000);
+	
 		console.log('Listening for https on port 3000');

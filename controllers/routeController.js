@@ -10,10 +10,11 @@ module.exports = function(app){
 
 		//Re-route unsecure requests to secure (Comment out for local testing)
 			function(req, res, next){
+
 				if(!req.secure) {
-    					var secureUrl = "https://" + req.headers['host'] + req.url; 
-    					res.writeHead(301, { "Location":  secureUrl });
-					res.end();
+    					var secureUrl = "https://" + req.get('host') + req.originalUrl; 
+    					//Client cache was causing an issue here with 301. Changing to 303 redirect.
+    					return res.redirect(303, secureUrl);
 				}
 			next();
 		},
