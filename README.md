@@ -21,11 +21,22 @@ _Technologies Used_
 1. Download or clone the repository into your node environment
 2. Run `npm install --production` from the root directory
 
-### Versioning
-Latest release:  `0.0.5`
+#### Versioning
+Latest release:  `0.1.0`
 
 True production releases will be 1.0.0, 2.0.0, and so on.  However, I will be maintaining a live environment
 in addition to local dev builds.  Incrimental v. tags are just to mark commits where I re-deployed.
+
+#### Changelog
+
+`0.1.0`
+* Updated to SSL/TLS protocol
+* Automated deployment task(s)
+
+`0.0.5`
+
+* Created base application structure and environment
+* Set up view routing
 
 #### License
 No license is granted.  As this is primarily a project for personal proficiency, education, and

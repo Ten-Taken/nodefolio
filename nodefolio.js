@@ -27,7 +27,8 @@
 		14. Set middleware request logging on static routes
 		15. Fix Firefox favicon bug
 		16. Error handling
-		17. Automate SSL renewal
+		17. Automate SSL renewal *DONE*
+		18. Set up local MTA, MDA, and SMTP
 */
 
 // Import modules.
@@ -75,8 +76,8 @@ routeController(app);
 
 		//https server
 		https.createServer({
-		    key: privateKey,
-		    cert: certificate
+		    	key: privateKey,
+		   	cert: certificate
 		}, app).listen(3000);
 	
 		console.log('Listening for https on port 3000');
