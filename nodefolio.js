@@ -29,6 +29,7 @@
 		16. Error handling
 		17. Automate SSL renewal *DONE*
 		18. Set up local MTA, MDA, and SMTP
+		19. Review all logic for non-blocking design
 */
 
 // Import modules.
@@ -38,6 +39,8 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path'); //Resolves absolute paths for the filesystem
 var routeController = require('./controllers/routeController.js');
+var helmet = require('helmet'); // Provides methods for secure headers
+var expectCt = require('expect-ct'); // Certificate Transparency Header
 
 
 // Define variables.
@@ -49,6 +52,27 @@ var certificate = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywo
 // Set template engine.
 app.set('view engine', 'ejs');
 
+// Security Headers in all routing
+app.use(helmet());
+
+// Explicit call to no-cache
+app.use(helmet.noCache());
+
+// Sets "Referrer-Policy: same-origin".
+app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
+
+// Sets Expect-CT: enforce; max-age=123. (Mandatory for chrome as of 04/2018. CA's are working on automation)
+app.use(expectCt({
+  enforce: true,
+  maxAge: 123 // Seconds
+  /*reportUri: 'http://example.com/report'*/
+}));
+
+// Set Content Security Policy (CSP)
+
+// Set HTTP Public Key Pinning (synchronize with cert renwals)
+
+// Set X-Permitted-Cross-Domain-Policies
 
 // Static file routing middleware.
 app.use(express.static('public'));
