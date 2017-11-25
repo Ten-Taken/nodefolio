@@ -16,7 +16,7 @@
 			5. Project Showcase
 			6. Hire me (client+emp)
 		5. Template Partials
-		6. Decide on data model, integrate relational or document db
+		6. Decide on data model, integrate relational or document db *DONE*
 		7. Integrate Nodemailer
 		8. Unit Testing workflow
 		9. Meta content
