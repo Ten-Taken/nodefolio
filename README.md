@@ -14,7 +14,7 @@ _Technologies Used_
 1. [Node.js](https://nodejs.org/en/ "Node.js")
 2. [Express.js](http://example.com "Express.js")
 3. [EJS](http://www.embeddedjs.com/ "EJS")
-4. [PostgreSQL] (https://www.postgresql.org/)
+4. [PostgreSQL](https://www.postgresql.org/)
 5. [Bootstrap](http://getbootstrap.com/ "Bootstrap")
 
 ### Installation
