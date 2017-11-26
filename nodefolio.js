@@ -24,8 +24,8 @@
 		11. Typography decisions
 		12. API's
 		13. EJS data injections
-		14. Set middleware request logging on static routes
-		15. Fix Firefox favicon bug
+		14. Set middleware request logging on static routes *DONE(changed mind too)*
+		15. Fix Firefox favicon bug **DONE**
 		16. Error handling
 		17. Automate SSL renewal *DONE*
 		18. Set up local MTA, MDA, and SMTP
@@ -38,63 +38,50 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var path = require('path'); //Resolves absolute paths for the filesystem
-var routeController = require('./controllers/routeController.js');
-var helmet = require('helmet'); // Provides methods for secure headers
-var expectCt = require('expect-ct'); // Certificate Transparency Header
+var employersController = require('./controllers/employersController.js');
+var securityController = require('./controllers/securityController.js');
+var indexController = require('./controllers/indexController.js');
+var aboutController = require('./controllers/aboutController.js');
+var showcaseController= require('./controllers/showcaseController.js');
+var blogController = require('./controllers/blogController.js');
+var contractsController = require('./controllers/contractsController.js');
+var staticController = require('./controllers/staticController.js');
+var logController = require('./controllers/logController.js');
+
 
 
 // Define variables.
 var app = express();
-var privateKey = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywolfe.tech/privkey.pem' ));
-var certificate = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywolfe.tech/cert.pem' ));
+//var privateKey = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywolfe.tech/privkey.pem' ));
+//var certificate = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywolfe.tech/cert.pem' ));
 
 
 // Set template engine.
 app.set('view engine', 'ejs');
 
-// Security Headers in all routing
-app.use(helmet());
-
-// Explicit call to no-cache
-app.use(helmet.noCache());
-
-// Sets "Referrer-Policy: same-origin".
-app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
-
-// Sets Expect-CT: enforce; max-age=123. (Mandatory for chrome as of 04/2018. CA's are working on automation)
-app.use(expectCt({
-  enforce: true,
-  maxAge: 123 // Seconds
-  /*reportUri: 'http://example.com/report'*/
-}));
-
-// Set Content Security Policy (CSP)
-
-// Set HTTP Public Key Pinning (synchronize with cert renwals)
-
-// Set X-Permitted-Cross-Domain-Policies
-
-// Static file routing middleware.
-app.use(express.static('public'));
-
-// Static routing for localized Bootstrap
-app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); 
-app.use('/jquery/js', express.static(__dirname + '/node_modules/jquery/dist'));
-app.use('/popper/js', express.static(__dirname + '/node_modules/popper.js/dist/umd'));
-
 
 // Fire controllers
-routeController(app);
+securityController(app);
+staticController(app, express);
+logController(app); //Logging routes after static <includes> avoids log clutter
+indexController(app);
+aboutController(app);
+showcaseController(app);
+blogController(app);
+contractsController(app);
+employersController(app);
+
 
 
 // Launch Server
 
 	//Uncomment for local testing
-		//app.listen(3000);
+		app.listen(3000);
 
 	// Comment out for local testing
 
 		//http server
+/*		
 		http.createServer(app).listen(2637);
 		console.log('Listening for http on port 2637');
 
@@ -103,5 +90,5 @@ routeController(app);
 		    	key: privateKey,
 		   	cert: certificate
 		}, app).listen(3000);
-	
+*/	
 		console.log('Listening for https on port 3000');
