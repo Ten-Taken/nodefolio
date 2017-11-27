@@ -16,6 +16,7 @@ _Technologies Used_
 3. [EJS](http://www.embeddedjs.com/ "EJS")
 4. [PostgreSQL](https://www.postgresql.org/)
 5. [Bootstrap](http://getbootstrap.com/ "Bootstrap")
+6. [Sequelize](http://docs.sequelizejs.com/ "Sequelize")
 
 ### Installation
 1. Download or clone the repository into your node environment

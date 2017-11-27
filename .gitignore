@@ -12,6 +12,9 @@
 #App deployment module, dev dependency only. This file contains sensitive data for deployment server
 flightplan.js
 
+#Database credentials module. This file contains unique sensitive data for deployment server
+dbCredentials.js
+
 pkg/
 src/
 
