@@ -6,7 +6,7 @@
 const Sequelize = require('sequelize');
 
 // Import connection credentials
-var dbCredentials = require('./dbCredentials.js'); //git ignoring for security
+const dbCredentials = require('./dbCredentials.js'); //git ignoring for security
 
 // Instantiate db connection
 const connection = new Sequelize(dbCredentials.database, dbCredentials.username, dbCredentials.password, {
@@ -21,7 +21,7 @@ const connection = new Sequelize(dbCredentials.database, dbCredentials.username,
   	http://docs.sequelizejs.com/manual/tutorial/querying.html#operators-security
   	http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
   	*/
-  operatorsAliases: false, 
+  operatorsAliases: false,
 
   pool: {
     max: dbCredentials.max,  // Maximum number of connections in the pool.
@@ -42,4 +42,4 @@ connection
     console.error('Unable to connect to the database:', err);
   });
 
-  module.exports = connection;
+  module.exports.connection = connection;

@@ -38,7 +38,6 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var path = require('path'); //Resolves absolute paths for the filesystem
-var connection = require('./ORM/connection.js'); // Instance of db connection
 var employersController = require('./controllers/employersController.js');
 var securityController = require('./controllers/securityController.js');
 var indexController = require('./controllers/indexController.js');
@@ -63,6 +62,11 @@ app.set('view engine', 'ejs');
 
 
 
+// Set loaded db models
+app.set('connection', require('./models/index.js').connection);
+
+
+
 // Fire controllers
 securityController(app);
 staticController(app, express);
@@ -78,8 +82,11 @@ employersController(app);
 
 // Launch Server
 
+	// Synchronize with db, launch server
+	app.get('connection').sync().then(function(){
 	//Uncomment for local testing
 		app.listen(3000);
+	});
 
 	// Comment out for local testing
 
