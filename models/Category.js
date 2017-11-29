@@ -5,7 +5,7 @@
               - category column becomes primary key
 */
 
-// in models/Post.js
+// in models/Category.js
 module.exports = function(connection, DataTypes) {
   return connection.define('Category', { 
 

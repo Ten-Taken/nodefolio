@@ -67,42 +67,42 @@ app.set('connection', require('./models/index.js').connection);
 
 
 
-// Fire controllers
-securityController(app);
-staticController(app, express);
-logController(app); //Logging routes after static <includes> avoids log clutter
-indexController(app);
-aboutController(app);
-showcaseController(app);
-blogController(app);
-contractsController(app);
-employersController(app);
+//Sync db for table operations before launching server and controllers.
+	//(This ensures table structure is consistent with latest model structure on deployments, and tables are defined before record manipulation).
+app.get('connection').sync().then(function(){
+
+	// Fire controllers
+	securityController(app);
+	staticController(app, express);
+	logController(app); //Logging routes after static <includes> avoids log clutter
+	indexController(app);
+	aboutController(app);
+	showcaseController(app);
+	blogController(app);
+	contractsController(app);
+	employersController(app);
 
 
 
-// Launch Server
+	// Launch Server
 
-	// Synchronize with db before launch.
-		//(this ensures table structure is consistent with latest model structure on deployments) 
-	app.get('connection').sync().then(function(){
+		//Uncomment for local testing
+			app.listen(3000);
 
-	//Uncomment for local testing
-		app.listen(3000);
+		// Comment out for local testing
 
-	// Comment out for local testing
+			//http server
+	/*		
+			http.createServer(app).listen(2637);
+			console.log('Listening for http on port 2637');
 
-		//http server
-/*		
-		http.createServer(app).listen(2637);
-		console.log('Listening for http on port 2637');
-
-		//https server
-		https.createServer({
-		    	key: privateKey,
-		   	cert: certificate
-		}, app).listen(3000);
-*/	
-		console.log('Listening for https on port 3000');
+			//https server
+			https.createServer({
+			    	key: privateKey,
+			   	cert: certificate
+			}, app).listen(3000);
+	*/	
+			console.log('Listening for https on port 3000');
 
 	});
 

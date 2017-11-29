@@ -7,35 +7,45 @@
 
 module.exports = function(app){
 
-// Loaded Post model
+// Reference loaded Post and Category models
 	var Post = app.get('connection').models.Post;
-		
-		//var Post = require('../models/index.js')['Post'];
-			//console.log(Post); //Yields post object separate from sequelize object
-
-		// When storing imports in properties, this is how accessors work
-			//console.log(app.get('connection').Post);  //undefined
-			//console.log(app.get('connection').models.Post); // This is how you access it
-			//console.log(app.get('connection').models); // ^Same as above
-
-		//When storing imports in an array, this is how accessors work
-			//console.log(app.get('connection').Post);  //undefined
-			//console.log(app.get('connection').models.Post);  //Still works the same
-			//console.log(app.get('connection').models); //Still works the same
-			//console.log(app.get('connection')['Post']); //undefined
+	var Category = app.get('connection').models.Category;
 
 //Manipulating records
 
+	//Inserting Category records on launch
+	Category.bulkCreate([
+	  { category: 'Development'},
+	  { category: 'Animals'},
+	  { category: 'Gaming'},
+	  { category: 'Miscellaneous'},
+	  { category: 'Personal'},
+	  { category: 'Opinion'}
+	]);
+
 	//Inserting a record ( .create() = immediate persistance.  .build() = is not stored until calling .save() )
 		//both .create() and .save() are async
-	/*	
+	
+	Post.create({
+		category: 	"Development",
+		title: 		"Provisioning an Arch linux server",
+		author: 	"Gregory Wolfe", 
+		body: 		"At first it feels like banging your head on a marble desk..."
+	});
+
 	Post.create({
 		category: 	"Personal",
-		title: 		"How To Cook Fish",
-		author: 	"Elvis Presley", 
-		body: 		"Start with butter, then...."
+		title: 		"Cooking Fish",
+		author: 	"Gregory Wolfe", 
+		body: 		"Olive oil, lemon, butter, and..."
 	});
-	*/	
+
+	Post.create({
+		category: 	"Animals",
+		title: 		"Endangered Red Wolf",
+		author: 	"Gregory Wolfe", 
+		body: 		"Reintroduction efforts have been dwindling..."
+	});			
 
 	//Retrieving a record
 	/*
