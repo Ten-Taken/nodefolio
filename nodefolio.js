@@ -82,11 +82,12 @@ employersController(app);
 
 // Launch Server
 
-	// Synchronize with db, launch server
+	// Synchronize with db before launch.
+		//(this ensures table structure is consistent with latest model structure on deployments) 
 	app.get('connection').sync().then(function(){
+
 	//Uncomment for local testing
 		app.listen(3000);
-	});
 
 	// Comment out for local testing
 
@@ -102,3 +103,6 @@ employersController(app);
 		}, app).listen(3000);
 */	
 		console.log('Listening for https on port 3000');
+
+	});
+
