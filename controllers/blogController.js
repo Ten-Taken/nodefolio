@@ -38,9 +38,11 @@ module.exports = function(app){
 	*/	
 
 	//Retrieving a record
+	/*
 	Post.findById(1).then(function(Post){
 		console.log(Post.dataValues);
 	});
+	*/
 		
 	//.then(function(error){
 	//	console.log(error); //Standard error handling promise

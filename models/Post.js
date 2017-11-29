@@ -2,6 +2,8 @@
 **
 	Schema and model for posts, for the blog
 		-Note - If you add methods to models, check out documentation on '.__factory.associations[]'
+            - Post table has Many:: 1 relationship with Category table.
+            -category column becomes foreign key
 */
 
 // in models/Post.js
@@ -10,7 +12,19 @@ module.exports = function(connection, DataTypes) {
 
   	category: {
                 type: DataTypes.STRING,
-                allowNull: false // Entries must have a category
+                allowNull: false, // Entries must have a category
+                defaultValue: "Miscellaneous",
+                references: {
+                  
+                     // This is a reference to another model
+                     model: Post,
+
+                     // This is the column name of the referenced model
+                     key: 'category',
+
+                     // This declares when to check the foreign key constraint. PostgreSQL only.
+                     deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+                   }
       },
 
     	title:{

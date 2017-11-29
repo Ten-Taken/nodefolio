@@ -10,8 +10,8 @@ var connection = require('../ORM/connection.js').connection;
 
 // load models
 var models = [
-  'Post'
-  //'Task',  -Example
+  'Post',
+  'Category'
   //'User'  - Example
 ];
 
