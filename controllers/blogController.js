@@ -21,12 +21,12 @@ module.exports = function(app){
 	//Inserting records in bulk
 	/*
 	Category.bulkCreate([
-	  { category: 'Development'},
-	  { category: 'Animals'},
-	  { category: 'Gaming'},
-	  { category: 'Miscellaneous'},
-	  { category: 'Personal'},
-	  { category: 'Opinion'}
+	  { category: 'Development', image: '/images/devcon.svg' ,imgalt: 'Icon of a computer terminal.' ,description: 'Programming and Web Development',link: '#'},
+	  { category: 'Animals', image: '/images/animalcon.svg' ,imgalt: 'Icon of a bear.' ,description: 'All things animals.',link: '#'},
+	  { category: 'Gaming', image: '/images/gamecon.svg' ,imgalt: 'Icon of a game controller.' ,description: 'Gaming reviews and shenanigans.',link: '#'},
+	  { category: 'Miscellaneous', image: '/images/miscon.svg' ,imgalt: 'Icon with two arrows.',description: 'Off-topic posts.',link: '#'},
+	  { category: 'Personal', image: '/images/personalcon.svg' ,imgalt: 'Icon of pencil and paper.',description: 'Posts about life and being human.',link: '#'},
+	  { category: 'Opinion', image: '/images/opinioncon.svg' ,imgalt: 'Icon of a lightbulb.' ,description: 'Posts about events and ideas.',link: '#'}
 	]);
 	*/
 
@@ -97,7 +97,7 @@ module.exports = function(app){
 	app.route('/blog')
 		.get(function (req, res) {
 
-			Category.findAll({attributes: ['category'], raw: true})
+			Category.findAll({attributes: ['category','image','imgalt','description','link'], raw: true})
 				
 				.then(function (Category) {
 			            

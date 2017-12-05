@@ -16,6 +16,30 @@ module.exports = function(connection, DataTypes) {
                 unique: true
       },
 
+      image:{
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true
+      },
+
+      imgalt: {
+              type: DataTypes.STRING,
+              allowNull: true
+      },
+
+      description: {
+                type: DataTypes.TEXT,
+                allowNull: true,
+
+      },
+
+      link:{
+                type: DataTypes.STRING,
+                defaultValue: "#"
+      }
+
+
+
   },
 
   {

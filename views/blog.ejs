@@ -25,8 +25,8 @@
       <div class="row justify-content-sm-center">
         <ol class="breadcrumb col-12">
           <li class="breadcrumb-item"><a href="#">Blog</a></li>
-          <li class="breadcrumb-item"><a href="#">Category</a></li>
-          <li class="breadcrumb-item active">Post</li>
+          <li class="breadcrumb-item"><a href="#">...</a></li>
+          <!--<li class="breadcrumb-item active">Post</li> -->
         </ol>
       </div>
 
@@ -56,15 +56,17 @@
 
       -->
     <div class="row justify-content-sm-center">
-      <!-- category.description  category.image  category.link-->
+      <!-- category.description  category.image category.imgalt category.link-->
   <% categories.forEach(function(category){ %>
     
     <div class="col-12 col-sm-6 col-md-4">
     <div class="card border-primary mb-3 cat-card" >
-      <img class="card-img-top" src="/images/wolfhead-small.png" alt="Card image cap">
+      <a href="<%= category.link %>">
+      <img class="card-img-top image-rezponsive mx-auto" src="<%= category.image %>" alt="<%= category.imgalt %>">
+    </a>
       <div class="card-body text-primary">
-        <h4 class="card-title"><%= category.category %></h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="<%= category.link %>"><h4 class="card-title"><%= category.category %></h4></a>
+        <p class="card-text"><%= category.description %></p>
       </div>
     </div>
     </div>
