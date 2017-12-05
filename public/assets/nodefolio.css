@@ -72,3 +72,10 @@ footer{
 
 /*May set up some breakpoints on typography, see https://v4-alpha.getbootstrap.com/content/typography/#responsive-typography
 */
+
+/*Blog category card, extra styling*/
+
+.cat-card{
+	max-width: 30rem; 
+	text-align: center;
+}

@@ -18,7 +18,7 @@
     <!--CONTENT AREA **WIP**-->    
 
     <!--<% include partials/comingsoon.ejs %> -->
-    <br><br><br>
+    <br><br><br><br>
 
     <div class="container-fluid">
 
@@ -30,7 +30,8 @@
         </ol>
       </div>
 
-   
+   <!--Move to partial
+
       <div class="row justify-content-sm-center">
         <div class="card border-danger col-sm-10">
           <div class="card-body">
@@ -53,15 +54,30 @@
         </div>
     </div>
 
-  </div>
-
+      -->
+    <div class="row justify-content-sm-center">
+      <!-- category.description  category.image  category.link-->
   <% categories.forEach(function(category){ %>
-
-      <li><%= category %></li>
+    
+    <div class="col-12 col-sm-6 col-md-4">
+    <div class="card border-primary mb-3 cat-card" >
+      <img class="card-img-top" src="/images/wolfhead-small.png" alt="Card image cap">
+      <div class="card-body text-primary">
+        <h4 class="card-title"><%= category.category %></h4>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div>
+    </div>
+    </div>
 
   <%
       }); 
   %>
+
+    </div>
+
+  </div>
+
+<br><br>
 
     <!--END CONTENT AREA -->
   
