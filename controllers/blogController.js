@@ -149,11 +149,26 @@ module.exports = function(app){
 
 	//Blog -  Category - Development
 	router.get('/development', function(req, res) {
-		/*find all from Category table where category = development*/
-		/*find/list from Post table where category = development*/
-		res.render('blogCategory');
+
+		Post.findAll({attributes: ['category','title','createdAt','updatedAt'], where:{category: 'Development'}, raw: true})
+
+			.then(function(Posts){
+
+				var postList = Posts;
+				console.log(postList);
+
+				res.render('blogCategory', {posts: postList});
+
+			})
+
+			.catch(function (error) {
+	            
+	            	console.log(error.message);
+	         		//return error.message;
+	        	});
 
 	});
+
 
 	//Blog -  Category - Animals
 	router.get('/animals', function(req, res) {

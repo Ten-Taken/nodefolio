@@ -2,7 +2,7 @@
 <html lang="en">
 
   <head>
-    <title>Blog - Category</title>
+    <title>Blog - <%= posts[0].category %></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,13 +24,37 @@
 
       <div class="row justify-content-sm-center">
         <ol class="breadcrumb col-12">
-          <li class="breadcrumb-item"><a href="#">Blog</a></li>
-          <li class="breadcrumb-item"><a href="#">Category</a></li>
+          <li class="breadcrumb-item"><a href=".">Blog</a></li>
+          <li class="breadcrumb-item"><a href=""><%= posts[0].category %></a></li>
           <li class="breadcrumb-item"><a href="#">...</a></li>
           <!--<li class="breadcrumb-item active">Post</li> -->
         </ol>
       </div>
 
+      <br>
+      <h3><%= posts[0].category %></h3>
+      
+      <hr>
+      <div class="list-group">
+        <% 
+        var spacedTitle;
+        var published;
+
+        posts.forEach(function(post){ 
+
+                post.category = (post.category).toLowerCase();
+                spacedTitle = post.title.split(' ').join('_');
+        %>
+
+        <a href="/blog/<%= post.category %>/<%= spacedTitle%>" class="list-group-item list-group-item-action active">
+          <h4><%= post.title %></h4> -- Published On: <span><%= post.createdAt %></span>
+        </a>
+
+        <%
+        }); 
+        %>
+
+      </div>
 
   </div>
 
