@@ -7,6 +7,10 @@
 
 module.exports = function(app){
 
+//Pull in dependencies to export a router
+	var express = require('express')
+  	var router = express.Router()
+
 // Reference loaded Post and Category models
 	var Post = app.get('connection').models.Post;
 	var Category = app.get('connection').models.Category;
@@ -94,6 +98,7 @@ module.exports = function(app){
 
 
 	// Blog Page view
+	/*
 	app.route('/blog')
 		.get(function (req, res) {
 
@@ -115,7 +120,80 @@ module.exports = function(app){
 		        	});
 
 		});
+	*/	
+	/*Refactoring with .use() method allows a cleaner way to organize sub-pathing*/
+
+  	// Blog top level
+	router.get('/', function(req, res) {
+
+		Category.findAll({attributes: ['category','image','imgalt','description','link'], raw: true})
+			
+			.then(function (Category) {
+		            
+		            var categoryList = Category;
+		            console.log(categoryList);
+
+		            res.render('blog',{categories: categoryList});
+		         
+	    		})
+
+			.catch(function (error) {
+	            
+	            	console.log(error.message);
+	         		//return error.message;
+	        	});
+
+	});
+
+	//I could possibly make these dynamic by querying the category table and looping over paths (lower case)
+
+	//Blog -  Category - Development
+	router.get('/development', function(req, res) {
+		/*find all from Category table where category = development*/
+		/*find/list from Post table where category = development*/
+		res.render('blogCategory');
+
+	});
+
+	//Blog -  Category - Animals
+	router.get('/animals', function(req, res) {
+
+		res.render('blogCategory');
+
+	});
+
+	//Blog -  Category - Gaming
+	router.get('/gaming', function(req, res) {
+
+		res.render('blogCategory');
+
+	});
+
+	//Blog -  Category - Miscellaneous
+	router.get('/miscellaneous', function(req, res) {
+
+		res.render('blogCategory');
+
+	});
+
+	//Blog -  Category - Personal
+	router.get('/personal', function(req, res) {
+
+		res.render('blogCategory');
+
+	});
+
+	//Blog -  Category - Opinion
+	router.get('/opinion', function(req, res) {
+
+		res.render('blogCategory');
+
+	});				
 
 
 
-}
+	//Must return router (expected by .use() method.)
+	return router;
+
+} // close export function
+

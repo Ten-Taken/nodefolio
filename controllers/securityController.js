@@ -7,7 +7,7 @@ var helmet = require('helmet'); // Provides methods for secure headers
 var expectCt = require('expect-ct'); // Certificate Transparency Header
 
 module.exports = function(app){
-/*
+	/*
 		app.use(
 
 		//Re-route unsecure requests to secure (Comment out for local testing)
@@ -22,9 +22,9 @@ module.exports = function(app){
 		},
 
 		);
-*/
 
-/*
+
+
 // Security Headers in all routing
 app.use(helmet());
 

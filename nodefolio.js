@@ -78,7 +78,7 @@ app.get('connection').sync().then(function(){
 	indexController(app);
 	aboutController(app);
 	showcaseController(app);
-	blogController(app);
+	app.use('/blog', blogController(app));
 	contractsController(app);
 	employersController(app);
 
@@ -92,7 +92,7 @@ app.get('connection').sync().then(function(){
 		// Comment out for local testing
 
 			//http server
-	/*		
+			/*
 			http.createServer(app).listen(2637);
 			console.log('Listening for http on port 2637');
 
@@ -101,7 +101,7 @@ app.get('connection').sync().then(function(){
 			    	key: privateKey,
 			   	cert: certificate
 			}, app).listen(3000);
-	*/	
+			*/
 			console.log('Listening for https on port 3000');
 
 	});
