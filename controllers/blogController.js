@@ -59,69 +59,13 @@ module.exports = function(app){
 	});			
 	*/
 
-	//Retrieving a record
-	/*
-	Post.findById(1).then(function(Post){
-		console.log(Post.dataValues);
-	});
-	*/
-		
-	//.then(function(error){
-	//	console.log(error); //Standard error handling promise
-	//});
-			
-			
-	//Func Def Promise  - Query category column of Category table (returns an array of objects)
-	/*
-	var categoryList = function(){
 
-		Category.findAll({attributes: ['category'], raw: true})
-			
-			.then(function (Category) {
-		            
-		            console.log(Category);
-		            //return Category;
-		         
-	    		})
-
-			.catch(function (error) {
-	            
-	            	console.log(error.message);
-	         		//return error.message;
-	        	});
-    	}
-
-	categoryList();
-    	*/
 
 /* ====COMMENT SEPARATION FROM EXAMPLES =====*/
 
 
-	// Blog Page view
-	/*
-	app.route('/blog')
-		.get(function (req, res) {
-
-			Category.findAll({attributes: ['category','image','imgalt','description','link'], raw: true})
-				
-				.then(function (Category) {
-			            
-			            var categoryList = Category;
-			            console.log(categoryList);
-
-			            res.render('blog',{categories: categoryList});
-			         
-		    		})
-
-				.catch(function (error) {
-		            
-		            	console.log(error.message);
-		         		//return error.message;
-		        	});
-
-		});
-	*/	
-	/*Refactoring with .use() method allows a cleaner way to organize sub-pathing*/
+	// Blog Section Views
+			/*Refactoring with .use() method allows a cleaner way to organize sub-pathing*/
 
   	// Blog top level
 	router.get('/', function(req, res) {
@@ -145,66 +89,37 @@ module.exports = function(app){
 
 	});
 
-	//I could possibly make these dynamic by querying the category table and looping over paths (lower case)
+	//Blog -  Category - Routes
+		/* This chained promise dynamically generates routes based on categories in the Category table*/
+	Category.findAll({attributes: ['category'], raw: true})
+	
+		.then(function(Category){
+			Category.forEach(function(category){
 
-	//Blog -  Category - Development
-	router.get('/development', function(req, res) {
+				router.get('/'+(category.category).toLowerCase(), function(req,res){
 
-		Post.findAll({attributes: ['category','title','createdAt','updatedAt'], where:{category: 'Development'}, raw: true})
+					Post.findAll({attributes: ['category', 'title', 'createdAt','updatedAt'], where: {category: category.category},raw: true})
 
-			.then(function(Posts){
+						.then(function(Posts){
+							var postList = Posts;
 
-				var postList = Posts;
-				console.log(postList);
+								//check for undefined (case where no posts have been made to this category)
+								if (typeof postList[0] ==undefined || postList[0]==null) {
+									//Create a dummy array with an object. Pass a flag to help check. Clear path back to category.
+									postList = [{category: category.category, title: "There are no posts in this category yet.", empty: true}];
+								}
 
-				res.render('blogCategory', {posts: postList});
+							console.log(postList);
 
-			})
+							res.render('blogCategory', {posts: postList});
+						})
 
-			.catch(function (error) {
-	            
-	            	console.log(error.message);
-	         		//return error.message;
-	        	});
-
-	});
-
-
-	//Blog -  Category - Animals
-	router.get('/animals', function(req, res) {
-
-		res.render('blogCategory');
-
-	});
-
-	//Blog -  Category - Gaming
-	router.get('/gaming', function(req, res) {
-
-		res.render('blogCategory');
-
-	});
-
-	//Blog -  Category - Miscellaneous
-	router.get('/miscellaneous', function(req, res) {
-
-		res.render('blogCategory');
-
-	});
-
-	//Blog -  Category - Personal
-	router.get('/personal', function(req, res) {
-
-		res.render('blogCategory');
-
-	});
-
-	//Blog -  Category - Opinion
-	router.get('/opinion', function(req, res) {
-
-		res.render('blogCategory');
-
-	});				
-
+						.catch(function(error){
+							console.log(error.message);
+						});
+				});
+			});
+		});	
 
 
 	//Must return router (expected by .use() method.)

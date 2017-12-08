@@ -2,6 +2,7 @@
 <html lang="en">
 
   <head>
+
     <title>Blog - <%= posts[0].category %></title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -35,15 +36,16 @@
       <h3><%= posts[0].category %></h3>
       
       <hr>
-      <div class="list-group">
+      <div id="post-list-group" class="list-group">
         <% 
         var spacedTitle;
-        var published;
 
         posts.forEach(function(post){ 
 
                 post.category = (post.category).toLowerCase();
                 spacedTitle = post.title.split(' ').join('_');
+
+                if(post.empty){ spacedTitle = '';}
         %>
 
         <a href="/blog/<%= post.category %>/<%= spacedTitle%>" class="list-group-item list-group-item-action active">
@@ -52,6 +54,7 @@
 
         <%
         }); 
+
         %>
 
       </div>
