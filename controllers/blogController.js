@@ -25,12 +25,12 @@ module.exports = function(app){
 	//Inserting records in bulk
 	/*
 	Category.bulkCreate([
-	  { category: 'Development', image: '/images/devcon.svg' ,imgalt: 'Icon of a computer terminal.' ,description: 'Programming and Web Development',link: '#'},
-	  { category: 'Animals', image: '/images/animalcon.svg' ,imgalt: 'Icon of a bear.' ,description: 'All things animals.',link: '#'},
-	  { category: 'Gaming', image: '/images/gamecon.svg' ,imgalt: 'Icon of a game controller.' ,description: 'Gaming reviews and shenanigans.',link: '#'},
-	  { category: 'Miscellaneous', image: '/images/miscon.svg' ,imgalt: 'Icon with two arrows.',description: 'Off-topic posts.',link: '#'},
-	  { category: 'Personal', image: '/images/personalcon.svg' ,imgalt: 'Icon of pencil and paper.',description: 'Posts about life and being human.',link: '#'},
-	  { category: 'Opinion', image: '/images/opinioncon.svg' ,imgalt: 'Icon of a lightbulb.' ,description: 'Posts about events and ideas.',link: '#'}
+	  { category: 'Development', image: '/images/devcon.svg' ,imgalt: 'Icon of a computer terminal.' ,description: 'Programming and Web Development'},
+	  { category: 'Animals', image: '/images/animalcon.svg' ,imgalt: 'Icon of a bear.' ,description: 'All things animals.'},
+	  { category: 'Gaming', image: '/images/gamecon.svg' ,imgalt: 'Icon of a game controller.' ,description: 'Gaming reviews and shenanigans.'},
+	  { category: 'Miscellaneous', image: '/images/miscon.svg' ,imgalt: 'Icon with two arrows.',description: 'Off-topic posts.'},
+	  { category: 'Personal', image: '/images/personalcon.svg' ,imgalt: 'Icon of pencil and paper.',description: 'Posts about life and being human.'},
+	  { category: 'Opinion', image: '/images/opinioncon.svg' ,imgalt: 'Icon of a lightbulb.' ,description: 'Posts about events and ideas.'}
 	]);
 	*/
 
@@ -42,6 +42,13 @@ module.exports = function(app){
 		title: 		"Provisioning an Arch linux server",
 		author: 	"Gregory Wolfe", 
 		body: 		"At first it feels like banging your head on a marble desk..."
+	});
+
+	Post.create({
+		category: 	"Development",
+		title: 		"Creating data models.",
+		author: 	"Gregory Wolfe", 
+		body: 		"Some say an Object Relational Mapper is more trouble than it is worth..."
 	});
 
 	Post.create({
@@ -70,7 +77,7 @@ module.exports = function(app){
   	// Blog top level
 	router.get('/', function(req, res) {
 
-		Category.findAll({attributes: ['category','image','imgalt','description','link'], raw: true})
+		Category.findAll({attributes: ['category','image','imgalt','description'], raw: true})
 			
 			.then(function (Category) {
 		            

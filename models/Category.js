@@ -33,13 +33,6 @@ module.exports = function(connection, DataTypes) {
 
       },
 
-      link:{
-                type: DataTypes.STRING,
-                defaultValue: "#"
-      }
-
-
-
   },
 
   {

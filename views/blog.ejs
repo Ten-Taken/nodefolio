@@ -24,7 +24,7 @@
 
       <div class="row justify-content-sm-center">
         <ol class="breadcrumb col-12">
-          <li class="breadcrumb-item"><a href="#">Blog</a></li>
+          <li class="breadcrumb-item"><a href="">Blog</a></li>
           <li class="breadcrumb-item"><a href="#">...</a></li>
           <!--<li class="breadcrumb-item active">Post</li> -->
         </ol>
@@ -61,11 +61,11 @@
     
     <div class="col-12 col-sm-6 col-md-4">
     <div class="card border-primary mb-3 cat-card" >
-      <a href="<%= category.link %>">
+      <a href="/blog/<%= (category.category).toLowerCase() %>">
       <img class="card-img-top image-rezponsive mx-auto" src="<%= category.image %>" alt="<%= category.imgalt %>">
     </a>
       <div class="card-body text-primary">
-        <a href="<%= category.link %>"><h4 class="card-title"><%= category.category %></h4></a>
+        <a href="/blog/<%= (category.category).toLowerCase() %>"><h4 class="card-title"><%= category.category %></h4></a>
         <p class="card-text"><%= category.description %></p>
       </div>
     </div>
