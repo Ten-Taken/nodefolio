@@ -126,7 +126,30 @@ module.exports = function(app){
 						});
 				});
 			});
-		});	
+		});
+
+
+	//Blog -  Category - Post - Routes
+		//This chained promise dynamically creates route for each blog post. String patterns are used to match valid posts
+	Post.findAll({attributes: ['category', 'author', 'title', 'body', 'createdAt','updatedAt'], raw: true})
+
+		.then(function(Post){
+			Post.forEach(function(post){
+				router.get('/*'+(post.title).split(' ').join('_'), function(req,res){ 
+				
+						
+							var currentPost = post;
+							console.log(currentPost);
+
+							res.render('blogPost',{post: currentPost});
+				});
+
+
+			});
+		})
+		.catch(function(error){
+			console.log(error.message);
+		});
 
 
 	//Must return router (expected by .use() method.)
