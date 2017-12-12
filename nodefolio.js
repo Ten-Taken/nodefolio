@@ -30,6 +30,8 @@
 		17. Automate SSL renewal *DONE*
 		18. Set up local MTA, MDA, and SMTP
 		19. Review all logic for non-blocking design
+		20. Open Graph Protocol API on blog posts
+		21. Session / validation (blog API)
 */
 
 // Import modules.
