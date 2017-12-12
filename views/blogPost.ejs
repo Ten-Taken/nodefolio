@@ -14,12 +14,13 @@
   <body>
      <!-- Nav -->
     <% include partials/nav.ejs %>
-
-    <!--CONTENT AREA **WIP**-->    
+     
 
     <br><br><br><br>
 
     <div class="container-fluid">
+
+      <!--Bread Crumbs -->
 
       <div class="row justify-content-sm-center">
         <ol class="breadcrumb col-12">
@@ -29,28 +30,36 @@
         </ol>
       </div>
 
+      <!--CONTENT AREA **WIP**-->   
 
-      <div class="row justify-content-sm-center">
+      <main class="row justify-content-sm-center">
         <div class="card border-danger col-sm-10">
-          <div class="card-body">
-            <blockquote class="card-blockquote">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-              <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
-            </blockquote>
+          <div class="card-body text-success">
+              <article>
+                <header class="text-center">
+                    <h2 class="text-primary"><%= post.title %></h2> 
+                    <strong>Published:</strong> <em><time pubdate="pubdate"><%= post.createdAt %></time></em>
+                </header>
+                <span class="text-chalk"><%= post.body %></span>
+                <footer class="text-center">Author: <cite title="<%= post.title %>"><%= post.author %></cite></footer>
+              </article>
           </div>
         </div>
 
-        <div class="list-group col-sm-2">
-          <a href="#" class="list-group-item list-group-item-action active">
-            <h4 class="list-group-item-heading">List group item heading</h4>
-            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action">
-            <h4 class="list-group-item-heading">List group item heading</h4>
-            <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-          </a>
-        </div>
+        <!--Sidebar, Article Navigation (hide on xs devices) -->
+
+    <div class="list-group col-sm-2 d-none d-sm-block">
+        <a href="#top" class="list-group-item list-group-item-action active">
+          Article Top
+        </a> <!-- Inject link per section in article -->
+        <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in
+        </a>
+        <a href="#" class="list-group-item list-group-item-action disabled">Morbi leo risus
+        </a>
     </div>
+
+     
+    </main>
 
   </div>
 
