@@ -52,6 +52,7 @@ var logController = require('./controllers/logController.js');
 
 
 
+
 // Define variables.
 var app = express();
 //var privateKey = fs.readFileSync( path.resolve('/etc/letsencrypt/live/gregorywolfe.tech/privkey.pem' ));

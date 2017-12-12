@@ -11,6 +11,19 @@ module.exports = function(app){
 	var express = require('express')
   	var router = express.Router()
 
+//Body parsing module for POST requests
+var bodyParser = require('body-parser'); 
+
+//Authentication and Session Modules
+var expressValidator = require('express-validator');
+var expressSession = require('express-session');
+
+//Attach middle-ware for this router
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(expressValidator());
+router.use(expressSession({secret: 'temp', saveUninitialized: false, resave: false}));
+	//Choosing between pg-session module, and sequelize-session module for session storage
+
 // Reference loaded Post and Category models
 	var Post = app.get('connection').models.Post;
 	var Category = app.get('connection').models.Category;
@@ -95,6 +108,21 @@ module.exports = function(app){
 	        	});
 
 	});
+
+
+
+	//Blog Administration - Login Page
+	router.get('/admin', function(req, res){
+
+		res.render('blogLogin');
+	});
+
+	//Blog Administration -Authentication
+	router.post('/admin', function(req, res){
+		//do stuff
+	});
+
+
 
 	//Blog -  Category - Routes
 		/* This chained promise dynamically generates routes based on categories in the Category table*/
