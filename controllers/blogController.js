@@ -20,8 +20,21 @@ var expressSession = require('express-session');
 
 //Attach middle-ware for this router
 router.use(bodyParser.urlencoded({ extended: false }));
-router.use(expressValidator());
-router.use(expressSession({secret: 'temp', saveUninitialized: false, resave: false}));
+router.use(expressValidator()); //Initializes the validator
+
+router.use(expressSession({
+	store: new (require('connect-pg-simple')(session))(), //uses session table
+	secret: 'temp', 
+	saveUninitialized: false, 
+	resave: false,
+	genid: function(req) {
+    			return genuuid() // use UUIDs for session IDs
+  	}, 
+	cookie: { secure: false, //change to true for production
+			      path: '/blog/admin',
+			sameSite: true
+	}
+}));
 	//Choosing between pg-session module, and sequelize-session module for session storage
 
 // Reference loaded Post and Category models
