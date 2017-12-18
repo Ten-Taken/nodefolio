@@ -17,22 +17,29 @@ var bodyParser = require('body-parser');
 //Authentication and Session Modules
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
+var SequelizeStore = require('connect-session-sequelize')(expressSession.Store);
+	//var SequelStore = require('sequelstore-connect')(expressSession);
+
+//Module for unique UID generation for sessions
+const uuidv4 = require('uuid/v4');
 
 //Attach middle-ware for this router
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(expressValidator()); //Initializes the validator
 
 router.use(expressSession({
-	store: new (require('connect-pg-simple')(session))(), //uses session table
-	secret: 'temp', 
+	store: new SequelizeStore({db: app.get('connection')/*, table: app.get('connection').models.Session*/}),
+	//store: new SequelStore({database: app.get('connection'), sessionModel: app.get('connection').models.Session }), 
+	secret: 'temp', //need to either hash this or import (look at process.env)
 	saveUninitialized: false, 
 	resave: false,
 	genid: function(req) {
-    			return genuuid() // use UUIDs for session IDs
+    			return uuidv4() // use UUIDs for session IDs
   	}, 
 	cookie: { secure: false, //change to true for production
 			      path: '/blog/admin',
-			sameSite: true
+			sameSite: true,
+			maxAge: 1 * 24 * 60 * 60 * 1000 // One day
 	}
 }));
 	//Choosing between pg-session module, and sequelize-session module for session storage
@@ -127,12 +134,31 @@ router.use(expressSession({
 	//Blog Administration - Login Page
 	router.get('/admin', function(req, res){
 
-		res.render('blogLogin');
+
+		res.render('blogLogin', {errors: req.session.errors});
+
+		req.session.errors = null; //Clear errors before next attempt
 	});
 
 	//Blog Administration -Authentication
 	router.post('/admin', function(req, res){
-		//do stuff
+
+		//Check for valid / sanitized data
+		req.check('email', 'An email was not submitted.').exists();
+		req.check('password', 'A password was not submitted').exists();
+		req.check('email', 'Invalid email address').isEmail();
+
+		var errors = req.validationErrors(); //stores all validation errors
+
+		//Store errors on session to return to user
+		if (errors) {
+			req.session.errors = errors;
+		}
+
+		res.redirect('/blog/admin');
+
+		//Check for valid credentials
+
 	});
 
 

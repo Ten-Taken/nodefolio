@@ -11,8 +11,8 @@ var connection = require('../ORM/connection.js').connection;
 // load models
 var models = [
   'Category',
-  'Post'
-  //'User'  - Example
+  'Post',
+  'Sessions'
 ];
 
 models.forEach(function(model) {
