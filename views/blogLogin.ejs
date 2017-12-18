@@ -34,12 +34,12 @@
     </div>
     <div class="form-group">
       <label for="email">Email address</label>
-      <input class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"  type="email">
+      <input class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"  type="email" name="email">
       <small id="emailHelp" class="form-text text-muted">All login attempts are recorded.</small>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input class="form-control" id="password" placeholder="Password"  type="password">
+      <input class="form-control" id="password" placeholder="Password"  type="password" name="password">
     </div>
 
     <button type="submit" class="btn btn-primary">Enter</button>
@@ -50,7 +50,7 @@
    
   
     <% 
-      if(errors){
+      if(!success && (errors)){
 
           errors.forEach(function(error){
           %>

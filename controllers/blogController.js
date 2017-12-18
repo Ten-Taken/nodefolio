@@ -8,8 +8,8 @@
 module.exports = function(app){
 
 //Pull in dependencies to export a router
-	var express = require('express')
-  	var router = express.Router()
+var express = require('express')
+var router = express.Router()
 
 //Body parsing module for POST requests
 var bodyParser = require('body-parser'); 
@@ -18,18 +18,27 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
 var SequelizeStore = require('connect-session-sequelize')(expressSession.Store);
-	//var SequelStore = require('sequelstore-connect')(expressSession);
+
 
 //Module for unique UID generation for sessions
 const uuidv4 = require('uuid/v4');
 
-//Attach middle-ware for this router
+//Attach parsing and validator middle-ware for this router
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(expressValidator()); //Initializes the validator
 
+//Pull in validation and sanitization sub-modules
+const { body,validationResult } = require('express-validator/check');
+const { sanitizeBody } = require('express-validator/filter');
+
+//Attach session-store middle-ware
 router.use(expressSession({
-	store: new SequelizeStore({db: app.get('connection')/*, table: app.get('connection').models.Session*/}),
-	//store: new SequelStore({database: app.get('connection'), sessionModel: app.get('connection').models.Session }), 
+	store: new SequelizeStore({
+		db: app.get('connection'),
+		checkExpirationInterval: 30 * 60 * 1000, // Interval. Clears expired sessions from db every 30 minutes.
+		expiration: 3 * 60 * 60 * 1000 // Session expires in 3 hours
+	}),
+	
 	secret: 'temp', //need to either hash this or import (look at process.env)
 	saveUninitialized: false, 
 	resave: false,
@@ -39,10 +48,10 @@ router.use(expressSession({
 	cookie: { secure: false, //change to true for production
 			      path: '/blog/admin',
 			sameSite: true,
-			maxAge: 1 * 24 * 60 * 60 * 1000 // One day
+			maxAge: 1 * 3 * 60 * 60 * 1000 // Cookie expires in 3 hours
 	}
 }));
-	//Choosing between pg-session module, and sequelize-session module for session storage
+	
 
 // Reference loaded Post and Category models
 	var Post = app.get('connection').models.Post;
@@ -134,28 +143,49 @@ router.use(expressSession({
 	//Blog Administration - Login Page
 	router.get('/admin', function(req, res){
 
+		//If current (valid) session, render blog tools
 
-		res.render('blogLogin', {errors: req.session.errors});
+		//Else, render login page.
+		res.render('blogLogin', {success: req.session.success, errors: req.session.errors});
 
-		req.session.errors = null; //Clear errors before next attempt
+		//Destroy session before next attempt (this prevents old errors and from just reloading with session before logging in)
+		req.session.destroy(function(err){
+			if (err) {res.negotiate(err);}
+		})
+
+
 	});
 
 	//Blog Administration -Authentication
 	router.post('/admin', function(req, res){
 
-		//Check for valid / sanitized data
-		req.check('email', 'An email was not submitted.').exists();
-		req.check('password', 'A password was not submitted').exists();
-		req.check('email', 'Invalid email address').isEmail();
+		//Check for valid / sanitized data (expand on these..trim, strip slashes, encode, etc)
+		req.checkBody('email', 'An email was not submitted.').notEmpty();
+		req.checkBody('password', 'A password was not submitted').notEmpty();
+		req.checkBody('email', 'Invalid email address').isEmail();
 
 		var errors = req.validationErrors(); //stores all validation errors
+
+		//Sanitize
+		req.sanitize('email').escape();
+		req.sanitize('email').trim().normalizeEmail();
+		req.sanitize('password').escape();
+		req.sanitize('password').trim();		
 
 		//Store errors on session to return to user
 		if (errors) {
 			req.session.errors = errors;
+			req.session.success = false;
+			res.redirect('/blog/admin'); //route back for another attempt
+		}
+		else{
+			//Check username and pw against User table
+				//if valid, render blog tools
+				//else redirect to login with message
+			req.session.success = true;
 		}
 
-		res.redirect('/blog/admin');
+		//res.redirect('/blog/admin');
 
 		//Check for valid credentials
 
