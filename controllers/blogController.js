@@ -75,7 +75,16 @@ router.use(expressSession({
     			console.log("Blog Admin User already exists, skipping record insertion.");
     		}
     		
-    	});
+    	})
+	.catch(function(error){
+		/*"Cannot ready property 0 of 'undefined'"
+			This error is generated when .spread() attempts to access an empty array.
+			The array is empty only when the Admin table is empty, which can be
+			just prior to the findOrCreate insertion on a fresh run. This will have no impact on
+			the application or functionality.
+		*/
+		console.log("Blog Admin User not found. Creating User now.");
+	});
 
 
 /* ====COMMENT SEPARATION FROM EXAMPLES =====*/
@@ -144,7 +153,7 @@ router.use(expressSession({
 			.then(function (Category) {
 		            
 		            var categoryList = Category;
-		            console.log(categoryList);
+		            //console.log(categoryList);
 
 		            res.render('blog',{categories: categoryList});
 		         
@@ -270,7 +279,7 @@ router.use(expressSession({
 									postList = [{category: category.category, title: "There are no posts in this category yet.", empty: true}];
 								}
 
-							console.log(postList);
+							//console.log(postList);
 
 							res.render('blogCategory', {posts: postList});
 						})
@@ -293,7 +302,7 @@ router.use(expressSession({
 				
 						
 							var currentPost = post;
-							console.log(currentPost);
+							//console.log(currentPost);
 
 							res.render('blogPost',{post: currentPost});
 				});
