@@ -77,7 +77,7 @@ router.use(expressSession({
     		
     	})
 	.catch(function(error){
-		/*"Cannot ready property 0 of 'undefined'"
+		/*"Cannot read property 0 of 'undefined'"
 			This error is generated when .spread() attempts to access an empty array.
 			The array is empty only when the Admin table is empty, which can be
 			just prior to the findOrCreate insertion on a fresh run. This will have no impact on
@@ -210,7 +210,7 @@ router.use(expressSession({
 		else{
 
 			//Query Admin table for matching user
-			Admin.findOne({'email': req.body.email, raw: true})
+			Admin.findOne({where: {'email': req.body.email}})
 
 				.then(function(Admin){
 
@@ -219,7 +219,7 @@ router.use(expressSession({
 
 					//if valid, render blog tools
 						//implement hashing module after this is built out
-					if (req.body.password === adminUser.email) {
+					if (req.body.password === adminUser.password) {
 
 						req.session.success = true; //Use flag as an extra layer of security within blogTools view
 						res.render('blogTools', {success: req.session.success});
@@ -241,6 +241,7 @@ router.use(expressSession({
 
 				.catch(function(error){
 					//Case where user email not found
+					console.log(error.message);
 					req.session.success = false; //Flag to render errors
 					req.session.errors = [{msg:'User does not exist'}];
 					res.redirect('/blog/admin');
