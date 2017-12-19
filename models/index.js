@@ -12,7 +12,8 @@ var connection = require('../ORM/connection.js').connection;
 var models = [
   'Category',
   'Post',
-  'Sessions'
+  'Sessions',
+  'Admin'
 ];
 
 models.forEach(function(model) {

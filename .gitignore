@@ -15,6 +15,9 @@ flightplan.js
 #Database credentials module. This file contains unique sensitive data for deployment server
 dbCredentials.js
 
+#Blog credentials module.  This file contains unique sensitive data for deployment server
+blogCredentials.js
+
 pkg/
 src/
 

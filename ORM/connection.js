@@ -12,6 +12,7 @@ const dbCredentials = require('./dbCredentials.js'); //git ignoring for security
 const connection = new Sequelize(dbCredentials.database, dbCredentials.username, dbCredentials.password, {
   host: dbCredentials.host,
   dialect: dbCredentials.dialect,
+  logging: false, //disable SQL console logging for production security
 
   	/*
 	Deprecation warning even without the use of aliases. Expects 'Sequelize.Op' configuration

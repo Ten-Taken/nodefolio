@@ -53,9 +53,29 @@ router.use(expressSession({
 }));
 	
 
-// Reference loaded Post and Category models
+// Reference loaded Admin, Post, and Category models
+	var Admin = app.get('connection').models.Admin;
 	var Post = app.get('connection').models.Post;
 	var Category = app.get('connection').models.Category;
+
+
+//Load db admin credentials - insert into Admin table (implement password hashing)
+	const blogCredentials = require('./blogCredentials.js');
+	Admin.findOrCreate({
+		where: {email: blogCredentials.email},
+		defaults: {
+			email: 	blogCredentials.email,
+			password: 	blogCredentials.password
+		},
+		raw: true
+	})
+	.spread((admin, created) => {
+    		//console.log(admin.email); //Do not log this, as it exposes data. Instead log message.
+    		if (!created) {
+    			console.log("Blog Admin User already exists, skipping record insertion.");
+    		}
+    		
+    	});
 
 
 /* ====COMMENT SEPARATION FROM EXAMPLES =====*/
@@ -168,7 +188,7 @@ router.use(expressSession({
 
 		//Sanitize
 		req.sanitize('email').escape();
-		req.sanitize('email').trim().normalizeEmail();
+		req.sanitize('email').trim();
 		req.sanitize('password').escape();
 		req.sanitize('password').trim();		
 
@@ -179,15 +199,52 @@ router.use(expressSession({
 			res.redirect('/blog/admin'); //route back for another attempt
 		}
 		else{
-			//Check username and pw against User table
-				//if valid, render blog tools
-				//else redirect to login with message
-			req.session.success = true;
+
+			//Query Admin table for matching user
+			Admin.findOne({'email': req.body.email, raw: true})
+
+				.then(function(Admin){
+
+					//Store user credentials
+					const adminUser = Admin; 
+
+					//if valid, render blog tools
+						//implement hashing module after this is built out
+					if (req.body.password === adminUser.email) {
+
+						req.session.success = true; //Use flag as an extra layer of security within blogTools view
+						res.render('blogTools', {success: req.session.success});
+
+					}
+
+					//else redirect with login with message (expects (status code, URL))
+						/*Note - sending a status code causes the browser to ask the user to click the redirect
+						   URL, which is not desirable behavior. Leaving the status code out, this 
+						   defaults to a 302 and immediately redirects.
+						*/
+					else{
+						req.session.success = false; //Flag to render errors
+						req.session.errors = [{msg:'Invalid password'}];
+						res.redirect('/blog/admin');
+					}
+
+				})
+
+				.catch(function(error){
+					//Case where user email not found
+					req.session.success = false; //Flag to render errors
+					req.session.errors = [{msg:'User does not exist'}];
+					res.redirect('/blog/admin');
+
+				});
+
+				
+				
+			
 		}
 
 		//res.redirect('/blog/admin');
 
-		//Check for valid credentials
 
 	});
 
