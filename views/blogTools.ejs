@@ -27,6 +27,69 @@
 
           <h1>Welcome, Admin!</h1>
 
+          <form action="/blog/admin" method="put">
+
+
+            <!-- Select or Create Category -->
+            <div class="form-group">
+              <select class="custom-select">
+                <option selected="">Choose Category</option>
+                <option value="NEW">CREATE NEW CATEGORY</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+
+            <!-- Category Creation Options-->
+            <div class="form-group">
+              <label class="col-form-label" for="newCategoryName">Category Name</label>
+              <input class="form-control" placeholder="Name of new category" id="newCategoryName" type="text">
+
+              <label class="col-form-label" for="newCategoryImg">Category Image</label>
+              <input class="form-control" placeholder="Category image location" id="newCategoryImg" type="text">
+
+              <label class="col-form-label" for="newCategoryAlt">Category Image Description</label>
+              <input class="form-control" placeholder="Category img alt text" id="newCategoryAlt" type="text">
+
+              <label class="col-form-label" for="newCategoryDesc">Category Description</label>
+              <input class="form-control" placeholder="Category Description" id="newCategoryDesc" type="text">              
+            </div>
+            
+
+            <!-- Post Title Input-->
+            <div class="form-group">
+              <label class="col-form-label col-form-label-lg" for="postTitle">Post Title</label>
+              <input class="form-control form-control-lg" placeholder="Title" id="postTitle" type="text">
+            </div>
+
+            <!-- Create or Delete Post of this Title-->
+            <fieldset class="form-group">
+              <legend>Create Or Delete</legend>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" name="optionsRadios" id="createPost" value="Create" checked="" type="radio">
+                  Create New Post with this Title
+                </label>
+              </div>
+              <div class="form-check">
+              <label class="form-check-label">
+                  <input class="form-check-input" name="optionsRadios" id="deletePost" value="Delete" type="radio">
+                  Delete Post with this Title
+                </label>
+              </div>
+            </fieldset>            
+
+            <!-- Post Entry Text Area -->
+            <div class="form-group">
+              <label for="postText">Post Text Area</label>
+              <textarea class="form-control" id="postText" rows="3"></textarea>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
       <%
           }
       %>

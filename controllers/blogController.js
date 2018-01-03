@@ -216,7 +216,7 @@ router.use(expressSession({
 
 		var errors = req.validationErrors(); //stores all validation errors
 
-		//Sanitize (check that these modify the body property, or if they are returning)
+		//Sanitize (check that these modify the body property (they do))
 		req.sanitize('email').escape();
 		req.sanitize('email').trim();
 		req.sanitize('password').escape();
@@ -272,6 +272,25 @@ router.use(expressSession({
 				
 				
 			
+		}
+
+	});
+
+
+
+	//Blog Administration - Inserting/updating new data
+	router.put('/admin', function(req, res){
+
+		//If valid session, perform CRUD and re-render tools
+		if (req.session.success) {
+
+			res.render('blogTools', {success: req.session.success});
+		}
+		//Else ignore request and warn user. Log to server for tracking.
+		else{
+			req.session.errors = [{msg:'Permission Denied'}];
+			console.log('\x1b[31m%s\x1b[0m',"Session: "+req.session.id +" attempted unauthorized blog data manipulation from ip "+req.connection.remoteAddress);
+			res.redirect('/blog/admin');
 		}
 
 	});
