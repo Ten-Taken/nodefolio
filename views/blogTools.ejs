@@ -25,42 +25,59 @@
             if(success){
       %>
 
-          <h1>Welcome, Admin!</h1>
+          <h2 class="text-center">Welcome, Admin!</h2>
+          <h4 class="text-center"><a href="/blog/admin/logout">Log Out</a></h4>
 
           <form action="/blog/admin" method="put">
 
+            <!-- Category Controls Table-->
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">
+                  <label class="col-form-label" for="newCategoryName">Name</label>
+                </th>
+                <th scope="col">
+                  <label class="col-form-label" for="newCategoryImg">Image</label>
+                </th>
+                <th scope="col">
+                  <label class="col-form-label" for="newCategoryAlt">Image Info</label>
+                </th>
+                <th scope="col">
+                  <label class="col-form-label" for="newCategoryDesc">Description</label>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+                  <tr>
+                  <th scope="row">
+                                <!-- Select or Create Category -->
+                                <div class="form-group">
+                                  <select class="custom-select">
+                                    <option selected="">Choose Category</option>
+                                    <option value="NEW">CREATE NEW CATEGORY</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                  </th>
+                  <td>
+                    <input class="form-control" placeholder="Name of new category" id="newCategoryName" type="text">
+                  </td>
+                  <td>
+                    <input class="form-control" placeholder="Category image location" id="newCategoryImg" type="text">
+                  </td>
+                  <td>
+                    <input class="form-control" placeholder="Category img alt text" id="newCategoryAlt" type="text">
+                  </td>
+                  <td>
+                    <input class="form-control" placeholder="Category Description" id="newCategoryDesc" type="text"> 
+                  </td>
+                </tr>
+            </tbody>
+            </table>    
 
-            <!-- Select or Create Category -->
-            <div class="form-group">
-              <select class="custom-select">
-                <option selected="">Choose Category</option>
-                <option value="NEW">CREATE NEW CATEGORY</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-            </div>
-
-            <!-- Category Creation Options-->
-            <div class="form-group">
-              <label class="col-form-label" for="newCategoryName">Category Name</label>
-              <input class="form-control" placeholder="Name of new category" id="newCategoryName" type="text">
-
-              <label class="col-form-label" for="newCategoryImg">Category Image</label>
-              <input class="form-control" placeholder="Category image location" id="newCategoryImg" type="text">
-
-              <label class="col-form-label" for="newCategoryAlt">Category Image Description</label>
-              <input class="form-control" placeholder="Category img alt text" id="newCategoryAlt" type="text">
-
-              <label class="col-form-label" for="newCategoryDesc">Category Description</label>
-              <input class="form-control" placeholder="Category Description" id="newCategoryDesc" type="text">              
-            </div>
-            
-
-            <!-- Post Title Input-->
-            <div class="form-group">
-              <label class="col-form-label col-form-label-lg" for="postTitle">Post Title</label>
-              <input class="form-control form-control-lg" placeholder="Title" id="postTitle" type="text">
-            </div>
 
             <!-- Create or Delete Post of this Title-->
             <fieldset class="form-group">
@@ -77,15 +94,19 @@
                   Delete Post with this Title
                 </label>
               </div>
-            </fieldset>            
+            </fieldset>
+
+            <!-- Post Title Input-->
+            <div class="form-group">
+              <label class="col-form-label col-form-label-lg" for="postTitle"><h5 class="text-center">Post Title</h5></label>
+              <input class="form-control form-control-lg" placeholder="Title" id="postTitle" type="text">
+            </div>                 
 
             <!-- Post Entry Text Area -->
             <div class="form-group">
-              <label for="postText">Post Text Area</label>
+              <label for="postText"><h5 class="text-center">Post Text Area</h5></label>
               <textarea class="form-control" id="postText" rows="3"></textarea>
             </div>
-
-
 
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
