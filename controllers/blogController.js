@@ -173,15 +173,36 @@ router.use(expressSession({
 	router.get('/admin', function(req, res){
 
 		//If current (valid) session, render blog tools
+		if (req.session.success) {
+			res.render('blogTools', {success: req.session.success});
+			console.log('\x1b[33m%s\x1b[0m',"Session: "+req.session.id +" accessed blog tools.");
+		}
+		else{
 
-		//Else, render login page.
+			//Else, render login page.
+			res.render('blogLogin', {success: req.session.success, errors: req.session.errors});
+
+			//Destroy session before next attempt (this prevents old errors and from just reloading with session before logging in)
+			req.session.destroy(function(err){
+				if (err) {res.negotiate(err);}
+			});
+		}
+
+	});
+
+	//Blog Administration - Logout (End Session)
+	router.get('/admin/logout', function(req, res){
+
+		//Return to login page with confirmation of session termination
+		req.session.errors = [{msg: 'You have logged out'}];
+		req.session.success = false;
 		res.render('blogLogin', {success: req.session.success, errors: req.session.errors});
 
-		//Destroy session before next attempt (this prevents old errors and from just reloading with session before logging in)
+		//Destroy session on logout
+		console.log('\x1b[33m%s\x1b[0m', "Session: "+req.session.id + " logged out.");
 		req.session.destroy(function(err){
 			if (err) {res.negotiate(err);}
-		})
-
+		});
 
 	});
 
@@ -195,7 +216,7 @@ router.use(expressSession({
 
 		var errors = req.validationErrors(); //stores all validation errors
 
-		//Sanitize
+		//Sanitize (check that these modify the body property, or if they are returning)
 		req.sanitize('email').escape();
 		req.sanitize('email').trim();
 		req.sanitize('password').escape();
@@ -223,7 +244,7 @@ router.use(expressSession({
 
 						req.session.success = true; //Use flag as an extra layer of security within blogTools view
 						res.render('blogTools', {success: req.session.success});
-
+						console.log('\x1b[33m%s\x1b[0m',"Session: "+req.session.id +" granted blog tool permissions.");
 					}
 
 					//else redirect with login with message (expects (status code, URL))
@@ -252,9 +273,6 @@ router.use(expressSession({
 				
 			
 		}
-
-		//res.redirect('/blog/admin');
-
 
 	});
 

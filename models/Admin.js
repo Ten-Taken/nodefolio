@@ -3,7 +3,7 @@
 	Schema and model for  storing Admin credentials, for blog administration.
 */
 
-// in models/Category.js
+// in models/Admin.js
 module.exports = function(connection, DataTypes) {
   return connection.define('Admin', { 
 
