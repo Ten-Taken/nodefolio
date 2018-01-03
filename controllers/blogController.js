@@ -62,9 +62,9 @@ router.use(expressSession({
 //Load db admin credentials - insert into Admin table (implement password hashing)
 	const blogCredentials = require('./blogCredentials.js');
 	Admin.findOrCreate({
-		where: {email: blogCredentials.email},
+		where: {email: blogCredentials.email.toLowerCase()},
 		defaults: {
-			email: 	blogCredentials.email,
+			email: 	blogCredentials.email.toLowerCase(),
 			password: 	blogCredentials.password
 		},
 		raw: true
@@ -231,7 +231,7 @@ router.use(expressSession({
 		else{
 
 			//Query Admin table for matching user
-			Admin.findOne({where: {'email': req.body.email}})
+			Admin.findOne({where: {'email': req.body.email.toLowerCase()}})
 
 				.then(function(Admin){
 
