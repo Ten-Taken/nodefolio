@@ -174,8 +174,20 @@ router.use(expressSession({
 
 		//If current (valid) session, render blog tools
 		if (req.session.success) {
-			res.render('blogTools', {success: req.session.success});
-			console.log('\x1b[33m%s\x1b[0m',"Session: "+req.session.id +" accessed blog tools.");
+
+			Category.findAll({attributes: ['category'], raw: true})
+
+			.then(function (Category) {
+
+				res.render('blogTools', {success: req.session.success, categories: Category});
+				console.log('\x1b[33m%s\x1b[0m',"Session: "+req.session.id +" accessed blog tools.");
+
+			})
+
+			.catch(function (error) {
+				console.log(error.message);
+			});			
+
 		}
 		else{
 
@@ -238,12 +250,12 @@ router.use(expressSession({
 					//Store user credentials
 					const adminUser = Admin; 
 
-					//if valid, render blog tools
+					//if valid, set flag and redirect for blog tools
 						//implement hashing module after this is built out
 					if (req.body.password === adminUser.password) {
 
 						req.session.success = true; //Use flag as an extra layer of security within blogTools view
-						res.render('blogTools', {success: req.session.success});
+						res.redirect('/blog/admin');
 						console.log('\x1b[33m%s\x1b[0m',"Session: "+req.session.id +" granted blog tool permissions.");
 					}
 
@@ -279,12 +291,13 @@ router.use(expressSession({
 
 
 	//Blog Administration - Inserting/updating new data
-	router.put('/admin', function(req, res){
+	router.post('/admin/publish', function(req, res){
 
-		//If valid session, perform CRUD and re-render tools
+		//If valid session, perform CRUD and re-direct
 		if (req.session.success) {
 
-			res.render('blogTools', {success: req.session.success});
+			
+			res.redirect('/blog/admin');
 		}
 		//Else ignore request and warn user. Log to server for tracking.
 		else{
