@@ -49,10 +49,16 @@ _Technologies Used_
 	`};`  
 	`module.exports = blogCredentials;`  
 
+### Launching
+
+From the root directory, run `node nodefolio`  
+
+My intention is to leave the application in a test-environment state in this repository.  In production, the site has additional security headers and encryption enabled.
+
 ### Versioning
 Latest release:  `0.1.0`
 
-True production releases will be 1.0.0, 2.0.0, and so on.  However, I will be maintaining a live environment
+Production releases will be 1.0.0, 2.0.0, and so on.  However, I will be maintaining a live environment
 in addition to local dev builds.  Incrimental v. tags are just to mark commits where I re-deployed.
 
 ### Changelog
@@ -67,5 +73,5 @@ in addition to local dev builds.  Incrimental v. tags are just to mark commits w
 * Set up view routing
 
 #### License
-No license is granted.  As this is primarily a project for personal proficiency, education, and
-showcasing to interested professional parties, contributions are not expected.
+No license is granted.  This is a project for personal proficiency, education, and
+showcasing to interested professional parties. Contributions are not expected.
