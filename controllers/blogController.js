@@ -341,21 +341,30 @@ router.use(expressSession({
 						author: 'Gregory Wolfe',
 						body: postText
 					})
-					/*IMPORTANT - Route isn't generated until reboot. Address this next commit*/
+					/*IMPORTANT - Route isn't generated until reboot. Address this 1-7-2018*/
 				})
 				.catch(function(error){
 					console.log(error.message);
 				});
 			}
 			else{//Else delete post from category
-					/*IMPORTANT - constraint validation error from sequelize on delete. Next commit*/
+					
+				pubCatFinal = pubCategory; //Set selected category
+
 				Post.destroy({
 					where: {
 						title: postTitle,
 						category: pubCatFinal
 					}
+				})
+				.then(deletedPost => {
+					if (deletedPost) {console.log('Post deleted: '+postTitle);}
+					else{console.log('Failed to delete post: '+postTitle);}
+				})
+				.catch(function(error){
+					console.log(error.message);
 				});
-				console.log('Post deleted: '+postTitle);
+				
 			}
 			
 			res.redirect('/blog/admin');
