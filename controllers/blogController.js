@@ -87,60 +87,6 @@ router.use(expressSession({
 	});
 
 
-/* ====COMMENT SEPARATION FROM EXAMPLES =====*/
-
-
-
-//Manipulating records
-
-	//Inserting records in bulk
-	/*
-	Category.bulkCreate([
-	  { category: 'Development', image: '/images/devcon.svg' ,imgalt: 'Icon of a computer terminal.' ,description: 'Programming and Web Development'},
-	  { category: 'Animals', image: '/images/animalcon.svg' ,imgalt: 'Icon of a bear.' ,description: 'All things animals.'},
-	  { category: 'Gaming', image: '/images/gamecon.svg' ,imgalt: 'Icon of a game controller.' ,description: 'Gaming reviews and shenanigans.'},
-	  { category: 'Miscellaneous', image: '/images/miscon.svg' ,imgalt: 'Icon with two arrows.',description: 'Off-topic posts.'},
-	  { category: 'Personal', image: '/images/personalcon.svg' ,imgalt: 'Icon of pencil and paper.',description: 'Posts about life and being human.'},
-	  { category: 'Opinion', image: '/images/opinioncon.svg' ,imgalt: 'Icon of a lightbulb.' ,description: 'Posts about events and ideas.'}
-	]);
-	*/
-
-	//Inserting a record ( .create() = immediate persistance.  .build() = is not stored until calling .save() )
-		//both .create() and .save() are async
-	/*
-	Post.create({
-		category: 	"Development",
-		title: 		"Provisioning an Arch linux server",
-		author: 	"Gregory Wolfe", 
-		body: 		"At first it feels like banging your head on a marble desk..."
-	});
-
-	Post.create({
-		category: 	"Development",
-		title: 		"Creating data models.",
-		author: 	"Gregory Wolfe", 
-		body: 		"Some say an Object Relational Mapper is more trouble than it is worth..."
-	});
-
-	Post.create({
-		category: 	"Personal",
-		title: 		"Cooking Fish",
-		author: 	"Gregory Wolfe", 
-		body: 		"Olive oil, lemon, butter, and..."
-	});
-
-	Post.create({
-		category: 	"Animals",
-		title: 		"Endangered Red Wolf",
-		author: 	"Gregory Wolfe", 
-		body: 		"Reintroduction efforts have been dwindling..."
-	});			
-	*/
-
-
-
-/* ====COMMENT SEPARATION FROM EXAMPLES =====*/
-
 
 	// Blog Section Views
 			/*Refactoring with .use() method allows a cleaner way to organize sub-pathing*/
