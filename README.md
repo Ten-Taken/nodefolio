@@ -1,5 +1,5 @@
 # nodefolio
-An Express app I built to power my development portfolio.
+An Express app I built to power my [development portfolio](https://gregorywolfe.tech/ "Portfolio").
 
 ## About
 **Author**: _Gregory Wolfe (ten-taken)_
@@ -12,7 +12,7 @@ Documentation standards TBD prior to v 1.0.
 ### Technologies
 _Technologies Used_
 1. [Node.js](https://nodejs.org/en/ "Node.js")
-2. [Express.js](http://example.com "Express.js")
+2. [Express.js](https://expressjs.com/ "Express.js")
 3. [EJS](http://www.embeddedjs.com/ "EJS")
 4. [PostgreSQL](https://www.postgresql.org/)
 5. [Bootstrap](http://getbootstrap.com/ "Bootstrap")
@@ -27,39 +27,35 @@ _Technologies Used_
 
 	*This file sets the environment variables that allow the app to access a database. You must install and create a PostgreSQL database yourself. Steps to do this are outside the scope of this document.*
 
-	`const dbCredentials = {`  
 
+	`const dbCredentials = {`  
     	`database:   	'yourDatabaseName',`//*change*  
     	`username:    	'yourDatabaseUser',`//*change*  
     	`password:   	'yourDatabasePassword',`//*change*  
     	`host:    		'localhost',`//*do not change*  
     	`dialect: 		'postgres',`//*do not change*  
     	`max: 			100`//*do not change*  
-
 	`};`  
-
 	`module.exports = dbCredentials;`  
 
 	- **nodefolio/controllers/blogCredentials.js**
 
 	*This file is used to create an administrative user for the app blog feature. You may use any credentials you wish, as long as the email is in a valid format. Blog admin tools are not linked on the site, so to access them you must visit* `localhost:3000/blog/admin`  
 
-	`const blogCredentials = {`  
 
+	`const blogCredentials = {`  
     	`email:   		'email@example.com',`//*change*  
     	`password:    	'examplePasswd',`//*change*  
-
 	`};`  
-
 	`module.exports = blogCredentials;`  
 
-#### Versioning
+### Versioning
 Latest release:  `0.1.0`
 
 True production releases will be 1.0.0, 2.0.0, and so on.  However, I will be maintaining a live environment
 in addition to local dev builds.  Incrimental v. tags are just to mark commits where I re-deployed.
 
-#### Changelog
+### Changelog
 
 `0.1.0`
 * Updated to SSL/TLS protocol
