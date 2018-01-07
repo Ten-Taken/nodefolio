@@ -296,6 +296,67 @@ router.use(expressSession({
 		//If valid session, perform CRUD and re-direct
 		if (req.session.success) {
 
+			//Submitted data (come back and sanitize)
+			var postTitle = req.body.postTitle;
+			var postText = req.body.postText;
+			var operation = req.body.optionsRadios; //Create or Delete
+			var pubCategory = req.body.pubCategory; //'Choose Category',NEW, or category name
+			var pubCatName = req.body.pubCatName;// Input category name
+			var pubCatFinal = ''; //Holds new or selected category
+			var pubCatImg = req.body.pubCatImg; //Static image location
+			var pubCatAlt = req.body.pubCatAlt; //Static image alt text
+			var pubCatDesc = req.body.pubCatDesc; //category description
+
+			//Determine operation (nested flow control)
+			if (operation === 'Create') {
+				//Perform category check, then chain Post operation
+				if (pubCategory !== 'NEW' && pubCategory !== 'Choose Category') {
+					pubCatFinal = pubCategory;
+				}
+				else{
+					pubCatFinal = pubCatName;
+				}
+				Category.findOrCreate({
+					where: {category: pubCatFinal},
+					defaults: {
+						category: pubCatFinal,
+						image: 	pubCatImg,
+						imgalt: pubCatAlt,
+						description: pubCatDesc
+					},
+					raw: true
+				})
+				.spread((category, created)=> { //spread is the callback
+					if (!created) {
+						console.log('Publishing post under existing '+category.category+' category');
+					}
+					else{
+						console.log('Publishing under new category: '+category.category);
+					}
+
+					//Perform post record insertion
+					Post.create({
+						category: category.category,
+						title: postTitle,
+						author: 'Gregory Wolfe',
+						body: postText
+					})
+					/*IMPORTANT - Route isn't generated until reboot. Address this next commit*/
+				})
+				.catch(function(error){
+					console.log(error.message);
+				});
+			}
+			else{//Else delete post from category
+					/*IMPORTANT - constraint validation error from sequelize on delete. Next commit*/
+				Post.destroy({
+					where: {
+						title: postTitle,
+						category: pubCatFinal
+					}
+				});
+				console.log('Post deleted: '+postTitle);
+			}
 			
 			res.redirect('/blog/admin');
 		}

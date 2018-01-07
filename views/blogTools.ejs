@@ -54,7 +54,7 @@
                   <th scope="row">
                                 <!-- Select or Create Category -->
                                 <div class="form-group">
-                                  <select class="custom-select">
+                                  <select class="custom-select" name="pubCategory">
                                     <option selected="">Choose Category</option>
                                     <option value="NEW">CREATE NEW CATEGORY</option>
                                     <%
@@ -69,16 +69,16 @@
                                 </div>
                   </th>
                   <td>
-                    <input class="form-control" placeholder="Name of new category" id="newCategoryName" type="text">
+                    <input class="form-control" placeholder="Name of new category" id="newCategoryName" type="text" name="pubCatName">
                   </td>
                   <td>
-                    <input class="form-control" placeholder="Category image location" id="newCategoryImg" type="text">
+                    <input class="form-control" placeholder="Category image location" id="newCategoryImg" type="text" name="pubCatImg">
                   </td>
                   <td>
-                    <input class="form-control" placeholder="Category img alt text" id="newCategoryAlt" type="text">
+                    <input class="form-control" placeholder="Category img alt text" id="newCategoryAlt" type="text" name="pubCatAlt">
                   </td>
                   <td>
-                    <input class="form-control" placeholder="Category Description" id="newCategoryDesc" type="text"> 
+                    <input class="form-control" placeholder="Category Description" id="newCategoryDesc" type="text" name="pubCatDesc"> 
                   </td>
                 </tr>
             </tbody>
@@ -105,13 +105,13 @@
             <!-- Post Title Input-->
             <div class="form-group">
               <label class="col-form-label col-form-label-lg" for="postTitle"><h5 class="text-center">Post Title</h5></label>
-              <input class="form-control form-control-lg" placeholder="Title" id="postTitle" type="text">
+              <input class="form-control form-control-lg" placeholder="Title" id="postTitle" type="text" name="postTitle">
             </div>                 
 
             <!-- Post Entry Text Area -->
             <div class="form-group">
               <label for="postText"><h5 class="text-center">Post Text Area</h5></label>
-              <textarea class="form-control" id="postText" rows="3"></textarea>
+              <textarea class="form-control" id="postText" rows="3" name="postText"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
