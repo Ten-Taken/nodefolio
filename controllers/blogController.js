@@ -273,6 +273,7 @@ router.use(expressSession({
 					raw: true
 				})
 				.spread((category, created)=> { //spread is the callback
+					
 					if (!created) {
 						console.log('Publishing post under existing '+category.category+' category');
 					}
@@ -287,8 +288,24 @@ router.use(expressSession({
 						author: 'Gregory Wolfe',
 						body: postText
 					})
-					/*IMPORTANT - Route isn't generated until reboot. Address this 1-7-2018*/
+					.then(function(result){
+						/*Generate route for new post
+							On app restart, route will be generated based off table query.
+						*/
+						router.get('/*'+(result.title).split(' ').join('_'), function(req,res){ 
+						
+							var currentPost = result;
+							//console.log(currentPost);
+
+							res.render('blogPost',{post: currentPost});
+						});						
+					})
+					.catch(function(error){
+						console.log(error.message);
+					});
+					
 				})
+
 				.catch(function(error){
 					console.log(error.message);
 				});
