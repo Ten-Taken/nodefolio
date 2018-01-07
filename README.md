@@ -21,6 +21,37 @@ _Technologies Used_
 ### Installation
 1. Download or clone the repository into your node environment
 2. Run `npm install --production` from the root directory
+3. You will need to create two config files to match your environment:
+
+	- **nodefolio/ORM/dbCredentials.js**
+
+	*This file sets the environment variables that allow the app to access a database. You must install and create a PostgreSQL database yourself. Steps to do this are outside the scope of this document.*
+
+	`const dbCredentials = {`  
+
+    	`database:   	'yourDatabaseName',`//*change*  
+    	`username:    	'yourDatabaseUser',`//*change*  
+    	`password:   	'yourDatabasePassword',`//*change*  
+    	`host:    		'localhost',`//*do not change*  
+    	`dialect: 		'postgres',`//*do not change*  
+    	`max: 			100`//*do not change*  
+
+	`};`  
+
+	`module.exports = dbCredentials;`  
+
+	- **nodefolio/controllers/blogCredentials.js**
+
+	*This file is used to create an administrative user for the app blog feature. You may use any credentials you wish, as long as the email is in a valid format. Blog admin tools are not linked on the site, so to access them you must visit* `localhost:3000/blog/admin`  
+
+	`const blogCredentials = {`  
+
+    	`email:   		'email@example.com',`//*change*  
+    	`password:    	'examplePasswd',`//*change*  
+
+	`};`  
+
+	`module.exports = blogCredentials;`  
 
 #### Versioning
 Latest release:  `0.1.0`
