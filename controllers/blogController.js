@@ -256,7 +256,7 @@ router.use(expressSession({
 			//Determine operation (nested flow control)
 			if (operation === 'Create') {
 				//Perform category check, then chain Post operation
-				if (pubCategory !== 'NEW' && pubCategory !== 'Choose Category') {
+				if (pubCategory !== 'NEW' && pubCategory !== 'Choose Category') { 
 					pubCatFinal = pubCategory;
 				}
 				else{
@@ -273,17 +273,48 @@ router.use(expressSession({
 					raw: true
 				})
 				.spread((category, created)=> { //spread is the callback
-					
+					//Case where ORM SQL Query found a matching category
 					if (!created) {
 						console.log('Publishing post under existing '+category.category+' category');
 					}
-					else{
-						console.log('Publishing under new category: '+category.category);
-					}
+					
+				})
 
-					//Perform post record insertion
+				.catch(function(error){
+					//Case where ORM SQL Query did not find match, and instead created category
+					
+					/*Generate route for new category
+						On app restart, route will be generated based off table query
+					*/
+					router.get('/'+(pubCatFinal).toLowerCase(), function(req,res){
+
+						Post.findAll({attributes: ['category', 'title', 'createdAt','updatedAt'], where: {category: pubCatFinal},raw: true})
+
+							.then(function(Posts){
+								var postList = Posts;
+
+									//check for undefined (case where no posts have been made to this category)
+									if (typeof postList[0] ==undefined || postList[0]==null) {
+										//Create a dummy array with an object. Pass a flag to help check. Clear path back to category.
+										postList = [{category: pubCatFinal, title: "There are no posts in this category yet.", empty: true}];
+									}
+
+								res.render('blogCategory', {posts: postList});
+							})
+
+							.catch(function(error){
+								console.log(error.message);
+							});							
+					})
+
+					console.log('Publishing under new category: '+pubCatFinal);					
+				})
+
+				.finally(function(){ //Perform post record insertion, regardless of new or existing category
+
+					
 					Post.create({
-						category: category.category,
+						category: pubCatFinal,
 						title: postTitle,
 						author: 'Gregory Wolfe',
 						body: postText
@@ -303,11 +334,7 @@ router.use(expressSession({
 					.catch(function(error){
 						console.log(error.message);
 					});
-					
-				})
 
-				.catch(function(error){
-					console.log(error.message);
 				});
 			}
 			else{//Else delete post from category
@@ -325,7 +352,7 @@ router.use(expressSession({
 					else{console.log('Failed to delete post: '+postTitle);}
 				})
 				.catch(function(error){
-					console.log(error.message);
+					console.log(error.message+" ErrD");
 				});
 				
 			}
